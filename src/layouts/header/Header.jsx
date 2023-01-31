@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { Nav } from "../../components/nav";
+
 import {
   AppBar,
   IconButton,
@@ -12,6 +14,8 @@ import {
   MenuItem,
   Divider,
   ListItemIcon,
+  Drawer,
+  Typography,
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -21,6 +25,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function Header() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const open = Boolean(anchorEl);
 
@@ -45,12 +50,26 @@ function Header() {
       <Toolbar sx={{ justifyContent: { xs: "space-between", md: "flex-end" } }}>
         {/* Ham Button on small devices */}
         <IconButton
-          onClick={() => null}
+          onClick={() => setIsDrawerOpen(true)}
           sx={{ display: { md: "none" } }}
           color="inherit"
         >
           <MenuIcon />
         </IconButton>
+
+        <Drawer
+          anchor="left"
+          variant="temporary"
+          open={isDrawerOpen}
+          onClose={() => setIsDrawerOpen(false)}
+          sx={{ display: { md: "none" } }}
+        >
+          <Toolbar />
+          <Typography variant="h5" textAlign={"center"}>
+            BET
+          </Typography>
+          <Nav />
+        </Drawer>
 
         <Stack direction={"row"} alignItems="center">
           {/* Total balance */}
