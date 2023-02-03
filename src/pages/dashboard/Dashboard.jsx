@@ -12,6 +12,8 @@ import {
 
 import { Line, getElementsAtEvent } from "react-chartjs-2";
 
+import { dateWiseInvestmentTrans } from "../../data/dummy";
+
 ChartJS.register(
   LineElement,
   PointElement,
@@ -22,22 +24,22 @@ ChartJS.register(
 );
 
 import { Box } from "@mui/material";
+import { purple } from "@mui/material/colors";
 
 function Dashboard() {
+  const dates = dateWiseInvestmentTrans.map((dit) => dit.date);
+  const iData = dateWiseInvestmentTrans.map((idata) => idata.amount);
+
   const data = {
-    labels: ["Mon", "Tue", "Wed"],
+    labels: dates,
     datasets: [
       {
-        label: "Weekdays",
-        data: [30, 33, 66],
-        borderColor: "aqua",
-        backgroundColor: "aqua",
-        tension: 0.4,
-        link: [
-          "https://www.chartjs.org",
-          "https://www.chartjs3.com",
-          "https://www.google.com",
-        ],
+        label: "Investment Transactions",
+        data: iData,
+        borderColor: purple[300],
+        backgroundColor: purple[300],
+        tension: 0.1,
+        link: dates.map((date) => `/history/invt?date=${date}`),
       },
     ],
   };
@@ -55,7 +57,8 @@ function Dashboard() {
       const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
       // console.log(dataPoint);
       const link = data.datasets[clickDatasetIndex].link[dataPoint];
-      window.open(link, "_black");
+      console.log(link);
+      // window.open(link, "_black");
     }
   }
 
