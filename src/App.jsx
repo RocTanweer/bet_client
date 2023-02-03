@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Header } from "./layouts/header";
 import { Sidebar } from "./layouts/sidebar";
+import { Dashboard } from "./pages/dashboard";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
     >
       <Header />
       <Sidebar />
+      <Dashboard />
     </Box>
   );
 }
