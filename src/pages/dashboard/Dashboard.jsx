@@ -12,7 +12,10 @@ import {
 
 import { Line, getElementsAtEvent } from "react-chartjs-2";
 
-import { dateWiseInvestmentTrans } from "../../data/dummy";
+import { dataForChart } from "../../utils";
+import { dateWiseInvestmentTrans, dateWiseSaleTrans } from "../../data/dummy";
+
+import { Box } from "@mui/material";
 
 ChartJS.register(
   LineElement,
@@ -23,42 +26,31 @@ ChartJS.register(
   Legend
 );
 
-import { Box } from "@mui/material";
-import { purple } from "@mui/material/colors";
-
 function Dashboard() {
-  const dates = dateWiseInvestmentTrans.map((dit) => dit.date);
-  const iData = dateWiseInvestmentTrans.map((idata) => idata.amount);
+  // Assuming passed arguments are same as fetched data
+  const { labels, options, datasets } = dataForChart(
+    dateWiseInvestmentTrans,
+    dateWiseSaleTrans
+  );
 
+  // Making data for the chart
   const data = {
-    labels: dates,
-    datasets: [
-      {
-        label: "Investment Transactions",
-        data: iData,
-        borderColor: purple[300],
-        backgroundColor: purple[300],
-        tension: 0.1,
-        link: dates.map((date) => `/history/invt?date=${date}`),
-      },
-    ],
+    labels: labels,
+    datasets: datasets,
   };
 
-  const options = {};
-
-  const chartRef = useRef();
+  const chartRef = useRef(); // ref to the Line Component
 
   function onClick(event) {
-    if (getElementsAtEvent(chartRef.current, event).length > 0) {
-      // console.log(getElementsAtEvent(chartRef.current, event));
-      const clickDatasetIndex = getElementsAtEvent(chartRef.current, event)[0]
-        .datasetIndex;
-      // console.log(clickDatasetIndex);
-      const dataPoint = getElementsAtEvent(chartRef.current, event)[0].index;
-      // console.log(dataPoint);
-      const link = data.datasets[clickDatasetIndex].link[dataPoint];
-      console.log(link);
-      // window.open(link, "_black");
+    const elementsAtEvent = getElementsAtEvent(chartRef.current, event);
+
+    if (elementsAtEvent.length > 0) {
+      elementsAtEvent.forEach((el) => {
+        if (!el.element.active) return;
+        const { datasetIndex, index } = el;
+        const link = data.datasets[datasetIndex].links[index];
+        console.log(link);
+      });
     }
   }
 
