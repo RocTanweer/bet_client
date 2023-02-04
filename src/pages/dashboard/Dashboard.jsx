@@ -59,15 +59,19 @@ function Dashboard() {
       sx={{
         gridColumn: { xs: "1 / 2", md: "2 / 3" },
         gridRow: "2 / 3",
+        overflowX: "scroll",
       }}
     >
       {/* Chart Shell */}
-      <Box>
+      <Box
+        sx={{ height: "calc(100vh - 84px)", width: "calc(2 * (100vh - 84px))" }}
+      >
         <Line
           data={data}
           options={options}
           onClick={onClick}
           ref={chartRef}
+          style={{ cursor: "pointer" }}
         ></Line>
       </Box>
     </Box>
