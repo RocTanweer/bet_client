@@ -40,7 +40,7 @@ function Nav() {
         <ListItemIcon>
           <PaidIcon />
         </ListItemIcon>
-        <ListItemText primary="Transactions" />
+        <ListItemText primary="Investment" />
 
         {isSubNavOpen.trans ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
@@ -74,7 +74,7 @@ function Nav() {
         <ListItemIcon>
           <ReceiptIcon />
         </ListItemIcon>
-        <ListItemText primary="Sales" />
+        <ListItemText primary="Sale" />
 
         {isSubNavOpen.sales ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
