@@ -9,8 +9,7 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 import AddIcon from "@mui/icons-material/Add";
 
-import { dateWiseInvestmentTrans } from "../../../data/dummy";
-import { Directions } from "@mui/icons-material";
+import InvTable from "./InvTable.jsx";
 
 function InvT() {
   const [date, setDate] = useState(null);
@@ -80,7 +79,7 @@ function InvT() {
           </Box>
         </Box>
         {/* Table */}
-        <Box>Body </Box>
+        <InvTable />
       </Box>
     </Box>
   );
