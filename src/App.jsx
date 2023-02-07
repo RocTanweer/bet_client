@@ -19,8 +19,8 @@ function App() {
       <Header />
       <Sidebar />
       {/* <Dashboard /> */}
-      <InvestmentHistory />
-      {/* <SaleHistory /> */}
+      {/* <InvestmentHistory /> */}
+      <SaleHistory />
     </Box>
   );
 }
