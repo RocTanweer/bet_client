@@ -84,53 +84,51 @@ export const dateWiseSaleTrans = [
   },
 ];
 
-export const investmentTransForADay = [
-  {
-    date: "2023-01-22",
-    trans: [
-      {
-        id: "#4d62hj5",
-        item: "pita bread",
-        amount: "300",
-      },
-      {
-        id: "#4d65dg4",
-        item: "eggs",
-        amount: "80",
-      },
-      {
-        id: "#4d6245gh",
-        item: "petrol",
-        amount: "180",
-      },
-      {
-        id: "#4d645j5",
-        item: "milk",
-        amount: "50",
-      },
-      {
-        id: "#4d686gs",
-        item: "rent",
-        amount: "3000",
-      },
-      {
-        id: "#4d68534",
-        item: "chicken",
-        amount: "1300",
-      },
-      {
-        id: "#4d64534",
-        item: "paalak",
-        amount: "30",
-      },
-      {
-        id: "#4d6877d",
-        item: "spices",
-        amount: "120",
-      },
-    ],
-  },
-];
+export const investmentTransForADay = {
+  date: "2023-01-22",
+  trans: [
+    {
+      id: "#4d62hj5",
+      item: "pita bread",
+      amount: "300",
+    },
+    {
+      id: "#4d65dg4",
+      item: "eggs",
+      amount: "80",
+    },
+    {
+      id: "#4d6245gh",
+      item: "petrol",
+      amount: "180",
+    },
+    {
+      id: "#4d645j5",
+      item: "milk",
+      amount: "50",
+    },
+    {
+      id: "#4d686gs",
+      item: "rent",
+      amount: "3000",
+    },
+    {
+      id: "#4d68534",
+      item: "chicken",
+      amount: "1300",
+    },
+    {
+      id: "#4d64534",
+      item: "paalak",
+      amount: "30",
+    },
+    {
+      id: "#4d6877d",
+      item: "spices",
+      amount: "120",
+    },
+  ],
+};
 
 // probably in a modal
 export const detailOfAInvestmentTrans = {
