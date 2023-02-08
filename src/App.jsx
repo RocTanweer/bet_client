@@ -4,7 +4,8 @@ import { Header } from "./layouts/header";
 import { Sidebar } from "./layouts/sidebar";
 import { Dashboard } from "./pages/dashboard";
 import { InvestmentHistory } from "./pages/investment/history";
-import { ForADay } from "./pages/investment/forADay";
+// import { ForADay } from "./pages/investment/forADay";
+import { ForADay } from "./pages/sale/forADay";
 import { SaleHistory } from "./pages/sale/history";
 
 function App() {
