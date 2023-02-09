@@ -27,6 +27,8 @@ const StyledTableCell = styled(TableCell)(() => ({
   },
 }));
 
+import { FlexBox } from "../../../layouts/flexBox";
+
 import { investmentTransForADay } from "../../../data/dummy";
 
 function ForADay() {
@@ -46,11 +48,8 @@ function ForADay() {
   }
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    <FlexBox
+      csx={{
         gridColumn: { xs: "1 / 2", md: "2 / 3" },
         gridRow: "2 / 3",
         overflowX: "scroll",
@@ -65,22 +64,14 @@ function ForADay() {
         }}
       >
         {/* Header */}
-        <Box
+        <FlexBox
           sx={{
-            display: "flex",
             justifyContent: "flex-end",
             gap: 10,
-            alignItems: "center",
           }}
         >
           {/* Date wrapper */}
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <FlexBox>
             <Typography
               mr={1}
               variant="subtitle1"
@@ -92,8 +83,8 @@ function ForADay() {
             <Typography variant="subtitle2" component={"p"}>
               {dayjs(investmentTransForADay.date).format("D MMM YYYY")}
             </Typography>
-          </Box>
-        </Box>
+          </FlexBox>
+        </FlexBox>
         {/* BOdy */}
         <Box sx={{ width: "100%" }}>
           <TableContainer
@@ -133,7 +124,7 @@ function ForADay() {
           />
         </Box>
       </Box>
-    </Box>
+    </FlexBox>
   );
 }
 

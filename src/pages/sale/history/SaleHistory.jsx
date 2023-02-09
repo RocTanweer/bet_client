@@ -9,6 +9,8 @@ import { DateChooser } from "../../../components/dateChooser";
 
 import { dateWiseSaleTrans } from "../../../data/dummy";
 
+import { FlexBox } from "../../../layouts/flexBox";
+
 function SaleHistory() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -26,22 +28,16 @@ function SaleHistory() {
   }
 
   return (
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    <FlexBox
+      csx={{
         gridColumn: { xs: "1 / 2", md: "2 / 3" },
         gridRow: "2 / 3",
         overflowX: "scroll",
       }}
     >
       {/* Main Content */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+      <FlexBox
+        csx={{
           flexDirection: "column",
           gap: 3,
           maxWidth: "730px",
@@ -50,11 +46,9 @@ function SaleHistory() {
         }}
       >
         {/* Header part */}
-        <Box
-          sx={{
-            display: "flex",
+        <FlexBox
+          csx={{
             justifyContent: "space-between",
-            alignItems: "center",
             width: "100%",
           }}
         >
@@ -74,7 +68,7 @@ function SaleHistory() {
               Invest
             </Button>
           </Box>
-        </Box>
+        </FlexBox>
         {/* Table */}
         <DateWiseTable
           page={page}
@@ -83,8 +77,8 @@ function SaleHistory() {
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           data={dateWiseSaleTrans}
         />
-      </Box>
-    </Box>
+      </FlexBox>
+    </FlexBox>
   );
 }
 

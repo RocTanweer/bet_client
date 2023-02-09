@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { DateWiseTable } from "../../../components/dateWiseTable";
 import { DateChooser } from "../../../components/dateChooser";
 import { dateWiseInvestmentTrans } from "../../../data/dummy";
+import FlexBox from "../../../layouts/flexBox/FlexBox";
 
 function InvestmentHistory() {
   const [page, setPage] = useState(0);
@@ -26,22 +27,16 @@ function InvestmentHistory() {
 
   return (
     // Page Component
-    <Box
-      sx={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    <FlexBox
+      csx={{
         gridColumn: { xs: "1 / 2", md: "2 / 3" },
         gridRow: "2 / 3",
         overflowX: "scroll",
       }}
     >
       {/* Main Content */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+      <FlexBox
+        csx={{
           flexDirection: "column",
           gap: 3,
           maxWidth: "730px",
@@ -50,11 +45,9 @@ function InvestmentHistory() {
         }}
       >
         {/* Header part */}
-        <Box
-          sx={{
-            display: "flex",
+        <FlexBox
+          csx={{
             justifyContent: "space-between",
-            alignItems: "center",
             width: "100%",
           }}
         >
@@ -74,7 +67,7 @@ function InvestmentHistory() {
               Invest
             </Button>
           </Box>
-        </Box>
+        </FlexBox>
         {/* Table */}
         <DateWiseTable
           page={page}
@@ -83,8 +76,8 @@ function InvestmentHistory() {
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           data={dateWiseInvestmentTrans}
         />
-      </Box>
-    </Box>
+      </FlexBox>
+    </FlexBox>
   );
 }
 
