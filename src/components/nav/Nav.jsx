@@ -17,6 +17,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PaidIcon from "@mui/icons-material/Paid";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 
+import { NavLink } from "react-router-dom";
+
 function Nav() {
   const [isSubNavOpen, setIsSubNavOpen] = useState({
     trans: false,
@@ -29,7 +31,7 @@ function Nav() {
 
   return (
     <List component={"nav"} aria-label="main navigation">
-      <ListItemButton>
+      <ListItemButton component={NavLink} to={"/dashboard"}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
@@ -47,21 +49,29 @@ function Nav() {
 
       <Collapse in={isSubNavOpen.trans} timeout="auto" unmountOnExit>
         <List component={"div"} disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            component={NavLink}
+            to={"/investment/items"}
+          >
             <ListItemIcon>
               <ListAltIcon />
             </ListItemIcon>
             <ListItemText primary="Items" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            component={NavLink}
+            to={"/investment/history"}
+          >
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
             <ListItemText primary="History" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => null}>
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>
@@ -81,21 +91,29 @@ function Nav() {
 
       <Collapse in={isSubNavOpen.sales} timeout="auto" unmountOnExit>
         <List component={"div"} disablePadding>
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            component={NavLink}
+            to={"/sale/products"}
+          >
             <ListItemIcon>
               <ListAltIcon />
             </ListItemIcon>
             <ListItemText primary="Products" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            component={NavLink}
+            to={"/sale/history"}
+          >
             <ListItemIcon>
               <HistoryIcon />
             </ListItemIcon>
             <ListItemText primary="History" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }}>
+          <ListItemButton sx={{ pl: 4 }} onClick={() => null}>
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>
