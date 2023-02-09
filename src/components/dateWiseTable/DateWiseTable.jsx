@@ -13,6 +13,7 @@ import {
   TablePagination,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const StyledTableCell = styled(TableCell)(() => ({
   [`&.${tableCellClasses.head}`]: {
@@ -30,6 +31,13 @@ function DateWiseTable({
   handleChangeRowsPerPage,
   data,
 }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function handleRowClick(date) {
+    navigate(`${location.pathname}/${date}`);
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <TableContainer component={Paper} sx={{ height: "auto", width: "100%" }}>
@@ -49,7 +57,7 @@ function DateWiseTable({
                   key={inv.date}
                   hover
                   sx={{ cursor: "pointer", tabIndex: "1" }}
-                  onClick={() => console.log(inv.date)}
+                  onClick={() => handleRowClick(inv.date)}
                 >
                   <TableCell>{inv.date}</TableCell>
                   <TableCell>{inv.amount}</TableCell>
