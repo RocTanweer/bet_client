@@ -16,6 +16,7 @@ import { dataForChart } from "../../utils";
 import { dateWiseInvestmentTrans, dateWiseSaleTrans } from "../../data/dummy";
 
 import { Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   LineElement,
@@ -27,6 +28,8 @@ ChartJS.register(
 );
 
 function Dashboard() {
+  const navigate = useNavigate();
+
   // Assuming passed arguments are same as fetched data
   const { labels, options, datasets } = dataForChart(
     dateWiseInvestmentTrans,
@@ -49,7 +52,7 @@ function Dashboard() {
         if (!el.element.active) return;
         const { datasetIndex, index } = el;
         const link = data.datasets[datasetIndex].links[index];
-        console.log(link);
+        navigate(link);
       });
     }
   }
