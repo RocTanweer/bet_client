@@ -1,14 +1,20 @@
 import { Box } from "@mui/material";
+import { useEffect } from "react";
+import { Outlet, useLocation, useNavigate } from "react-router-dom";
 
 import { Header } from "./layouts/header";
 import { Sidebar } from "./layouts/sidebar";
-import { Dashboard } from "./pages/dashboard";
-import { InvestmentHistory } from "./pages/investment/history";
-// import { ForADay } from "./pages/investment/forADay";
-import { ForADay } from "./pages/sale/forADay";
-import { SaleHistory } from "./pages/sale/history";
 
 function App() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      navigate("/dashboard");
+    }
+  }, []);
+
   return (
     <Box
       sx={{
@@ -20,10 +26,8 @@ function App() {
     >
       <Header />
       <Sidebar />
-      {/* <Dashboard /> */}
-      {/* <InvestmentHistory /> */}
-      {/* <SaleHistory /> */}
-      <ForADay />
+
+      <Outlet />
     </Box>
   );
 }
