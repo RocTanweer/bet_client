@@ -16,7 +16,7 @@ export function dataForChart(dateWiseInvestmentTrans, dateWiseSaleTrans) {
         borderColor: purple[300],
         backgroundColor: purple[300],
         tension: 0.1,
-        links: labels.map((date) => `/history/invt?date=${date}`),
+        links: labels.map((date) => `/investment/history/${date}`),
       },
       {
         label: "Sales",
@@ -24,7 +24,7 @@ export function dataForChart(dateWiseInvestmentTrans, dateWiseSaleTrans) {
         borderColor: cyan[300],
         backgroundColor: cyan[300],
         tension: 0.1,
-        links: labels.map((date) => `/history/salt?date=${date}`),
+        links: labels.map((date) => `/sale/history/${date}`),
       },
     ],
   };
