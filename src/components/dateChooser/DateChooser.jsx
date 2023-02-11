@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { TextField } from "@mui/material";
 
 import dayjs from "dayjs";
@@ -7,19 +5,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-function DateChooser() {
-  const [date, setDate] = useState(null);
-
+function DateChooser({ label, date, setDate, csx }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DatePicker
-        label="Search by date"
+        label={label}
         value={date}
         onChange={(newValue) => {
           setDate(dayjs(newValue));
         }}
         renderInput={(params) => (
-          <TextField sx={{ mr: 2, width: "175px" }} size="small" {...params} />
+          <TextField sx={{ ...csx }} size="small" {...params} />
         )}
       />
     </LocalizationProvider>
