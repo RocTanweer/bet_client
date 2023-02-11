@@ -15,6 +15,8 @@ function SaleHistory() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
+  const [date, setDate] = useState(null);
+
   function handleChangePage(event, newPage) {
     // We can use this situation to fetch another batch of data
     // console.log(dateWiseInvestmentTrans.length / rowsPerPage > newPage);
@@ -62,7 +64,12 @@ function SaleHistory() {
           </Box>
 
           <Box>
-            <DateChooser />
+            <DateChooser
+              label={"Search by date"}
+              date={date}
+              setDate={setDate}
+              csx={{ mr: 2, width: "175px" }}
+            />
 
             <Button variant="contained" startIcon={<AddIcon />}>
               Invest
