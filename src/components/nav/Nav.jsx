@@ -118,7 +118,7 @@ function Nav() {
             <ListItemText primary="History" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }} onClick={() => null}>
+          <ListItemButton sx={{ pl: 4 }} component={NavLink} to={"/sale/add"}>
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>
