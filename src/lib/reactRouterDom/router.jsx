@@ -5,7 +5,8 @@ import { InvestmentHistory } from "../../pages/investment/history";
 import { SaleHistory } from "../../pages/sale/history";
 import { ForADay as InvForADay } from "../../pages/investment/forADay";
 import { ForADay as SalForADay } from "../../pages/sale/forADay";
-import Add from "../../pages/investment/add/Add";
+import { Add as AddInvestment } from "../../pages/investment/add/";
+import { Add as AddSale } from "../../pages/sale/add";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "investment/add",
-        element: <Add />,
+        element: <AddInvestment />,
       },
       {
         path: "sale/history",
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "sale/history/:date",
         element: <SalForADay />,
+      },
+      {
+        path: "sale/add",
+        element: <AddSale />,
       },
     ],
   },
