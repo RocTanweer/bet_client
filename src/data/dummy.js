@@ -174,3 +174,108 @@ export const saleTransForADay = {
     },
   ],
 };
+
+export const investmentItem = [
+  {
+    name: "bottle",
+  },
+  {
+    name: "biscuit",
+  },
+  {
+    name: "gas",
+  },
+  {
+    name: "pita bread",
+  },
+  {
+    name: "milk",
+  },
+  {
+    name: "eggs",
+  },
+  {
+    name: "chai",
+  },
+  {
+    name: "curd",
+  },
+  {
+    name: "water",
+  },
+  {
+    name: "chicken",
+  },
+  {
+    name: "petrol",
+  },
+  {
+    name: "maida",
+  },
+  {
+    name: "charcoal",
+  },
+];
+
+export const saleProduct = [
+  {
+    name: "Saahan Only Chicken",
+    price: 139,
+  },
+  {
+    name: "Sarfme's Platter",
+    price: 239,
+  },
+  {
+    name: null,
+    price: null,
+  },
+  {
+    name: "Chicken Tikka Kabab",
+    price: 69,
+  },
+  {
+    name: "Malai Kabab",
+    price: 59,
+  },
+  {
+    name: "Seek Kabab",
+    price: 39,
+  },
+  {
+    name: "Water",
+    price: 20,
+  },
+  {
+    name: "Chai",
+    price: 20,
+  },
+  {
+    name: "Falafel",
+    price: 60,
+  },
+  {
+    name: "Pita Wrap",
+    price: 55,
+  },
+  {
+    name: "Rumali Wrap",
+    price: 59,
+  },
+  {
+    name: "Khabooz Shawarma",
+    price: 79,
+  },
+  {
+    name: "Samoli Shawarma",
+    price: 79,
+  },
+  {
+    name: "Rumali Shawarma",
+    price: 109,
+  },
+  {
+    name: "Pita Bread Shawarma",
+    price: 95,
+  },
+];
