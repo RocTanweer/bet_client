@@ -175,7 +175,7 @@ export const saleTransForADay = {
   ],
 };
 
-export const investmentItem = [
+export const investmentItems = [
   {
     name: "bottle",
   },
@@ -217,7 +217,7 @@ export const investmentItem = [
   },
 ];
 
-export const saleProduct = [
+export const saleProducts = [
   {
     name: "Saahan Only Chicken",
     price: 139,
@@ -225,10 +225,6 @@ export const saleProduct = [
   {
     name: "Sarfme's Platter",
     price: 239,
-  },
-  {
-    name: null,
-    price: null,
   },
   {
     name: "Chicken Tikka Kabab",
