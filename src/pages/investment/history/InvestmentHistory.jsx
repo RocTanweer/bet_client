@@ -8,6 +8,7 @@ import { DateWiseTable } from "../../../components/dateWiseTable";
 import { DateChooser } from "../../../components/dateChooser";
 import { dateWiseInvestmentTrans } from "../../../data/dummy";
 import FlexBox from "../../../layouts/flexBox/FlexBox";
+import MyTable from "../../../components/myTable/MyTable";
 
 function InvestmentHistory() {
   const [page, setPage] = useState(0);
@@ -76,12 +77,22 @@ function InvestmentHistory() {
           </Box>
         </FlexBox>
         {/* Table */}
-        <DateWiseTable
+        {/* <DateWiseTable
           page={page}
           rowsPerPage={rowsPerPage}
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           data={dateWiseInvestmentTrans}
+        /> */}
+        <MyTable
+          headData={["Data", "Amount (INR)"]}
+          rowsData={dateWiseInvestmentTrans}
+          page={page}
+          handleChangePage={handleChangePage}
+          rowsPerPage={rowsPerPage}
+          handleChangeRowsPerPage={handleChangeRowsPerPage}
+          handleRowClick={() => console.log("clicked")}
+          infinitePagination={true}
         />
       </FlexBox>
     </FlexBox>
