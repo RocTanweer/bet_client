@@ -4,29 +4,26 @@ import { Box, Button, Typography } from "@mui/material";
 
 import AddIcon from "@mui/icons-material/Add";
 
-import { DateWiseTable } from "../../../components/dateWiseTable";
 import { DateChooser } from "../../../components/dateChooser";
 
 import { dateWiseSaleTrans } from "../../../data/dummy";
 
+import { MyTable } from "../../../components/myTable";
 import { FlexBox } from "../../../layouts/flexBox";
 
-function SaleHistory() {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+import { useNavigate } from "react-router-dom";
 
+function SaleHistory() {
   const [date, setDate] = useState(null);
 
-  function handleChangePage(event, newPage) {
-    // We can use this situation to fetch another batch of data
-    // console.log(dateWiseInvestmentTrans.length / rowsPerPage > newPage);
-    setPage(newPage);
+  const navigate = useNavigate();
+
+  function handleRowClick(data) {
+    navigate(`${location.pathname}/${data.date}`);
   }
 
-  function handleChangeRowsPerPage(event) {
-    console.log(event.target.value);
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
+  function handleInfinitePagination(newPage, rowsPerPage) {
+    console.log(dateWiseSaleTrans.length / rowsPerPage > newPage);
   }
 
   return (
@@ -77,12 +74,11 @@ function SaleHistory() {
           </Box>
         </FlexBox>
         {/* Table */}
-        <DateWiseTable
-          page={page}
-          rowsPerPage={rowsPerPage}
-          handleChangePage={handleChangePage}
-          handleChangeRowsPerPage={handleChangeRowsPerPage}
-          data={dateWiseSaleTrans}
+        <MyTable
+          headData={["Data", "Amount (INR)"]}
+          rowsData={dateWiseSaleTrans}
+          handleRowClick={handleRowClick}
+          handleInfinitePagination={handleInfinitePagination}
         />
       </FlexBox>
     </FlexBox>

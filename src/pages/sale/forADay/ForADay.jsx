@@ -8,6 +8,7 @@ import { saleTransForADay } from "../../../data/dummy";
 import { FlexBox } from "../../../layouts/flexBox";
 
 import { ForADayTable } from "../../../components/forADayTable";
+import MyTable from "../../../components/myTable/MyTable";
 
 function ForADay() {
   const { date } = useParams();
@@ -51,9 +52,9 @@ function ForADay() {
           </FlexBox>
         </FlexBox>
         {/* BOdy */}
-        <ForADayTable
-          data={saleTransForADay}
-          tableHeads={["ID", "Item", "Unit", "Amount (INR)"]}
+        <MyTable
+          headData={["ID", "Item", "Unit", "Amount (INR)"]}
+          rowsData={saleTransForADay.trans}
         />
       </Box>
     </FlexBox>

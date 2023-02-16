@@ -2,13 +2,12 @@ import { Box, Typography } from "@mui/material";
 
 import dayjs from "dayjs";
 
-import { ForADayTable } from "../../../components/forADayTable";
-
 import { FlexBox } from "../../../layouts/flexBox";
 
 import { investmentTransForADay } from "../../../data/dummy";
 
 import { useParams } from "react-router-dom";
+import MyTable from "../../../components/myTable/MyTable";
 
 function ForADay() {
   const { date } = useParams();
@@ -52,9 +51,9 @@ function ForADay() {
           </FlexBox>
         </FlexBox>
         {/* BOdy */}
-        <ForADayTable
-          data={investmentTransForADay}
-          tableHeads={["ID", "Item", "Amount (INR)"]}
+        <MyTable
+          headData={["ID", "Item", "Amount (INR)"]}
+          rowsData={investmentTransForADay.trans}
         />
       </Box>
     </FlexBox>
