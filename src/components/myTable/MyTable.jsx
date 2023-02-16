@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import {
   TableContainer,
   Table,
@@ -15,13 +17,24 @@ import { StyledTableCell } from "./StyledTableCell";
 function MyTable({
   headData,
   rowsData,
-  page,
-  handleChangePage,
-  rowsPerPage,
-  handleChangeRowsPerPage,
   handleRowClick,
-  infinitePagination,
+  handleInfinitePagination,
 }) {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  function handleChangePage(event, newPage) {
+    setPage(newPage);
+    if (handleInfinitePagination) {
+      handleInfinitePagination(newPage, rowsPerPage);
+    }
+  }
+
+  function handleChangeRowsPerPage(event) {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  }
+
   return (
     <Box sx={{ width: "100%" }}>
       <TableContainer component={Paper} sx={{ height: "auto", width: "100%" }}>
@@ -45,7 +58,7 @@ function MyTable({
                     key={i}
                     hover={handleRowClick && true}
                     sx={{ cursor: `${handleRowClick ? "pointer" : ""}` }}
-                    onClick={handleRowClick}
+                    onClick={() => handleRowClick && handleRowClick(data)}
                   >
                     {values.map((value, j) => (
                       <TableCell key={j}>{value}</TableCell>
@@ -59,7 +72,7 @@ function MyTable({
       <TablePagination
         rowsPerPageOptions={[5, 10]}
         component="div"
-        count={infinitePagination ? -1 : rowsData.length}
+        count={handleInfinitePagination ? -1 : rowsData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
