@@ -1,20 +1,6 @@
-import { useState } from "react";
-
-import {
-  Box,
-  Typography,
-  TableContainer,
-  Table,
-  TableHead,
-  TableCell,
-  TableRow,
-  TableBody,
-  TablePagination,
-  Paper,
-} from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 import { FlexBox } from "../../../layouts/flexBox";
-import { StyledTableCell } from "../../../components/forADayTable/StyledTableCell";
 
 import { saleProducts } from "../../../data/dummy";
 import { MyTable } from "../../../components/myTable";

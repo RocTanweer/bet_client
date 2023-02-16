@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { saleTransForADay } from "../../../data/dummy";
 import { FlexBox } from "../../../layouts/flexBox";
 
-import { ForADayTable } from "../../../components/forADayTable";
 import MyTable from "../../../components/myTable/MyTable";
 
 function ForADay() {
