@@ -8,9 +8,7 @@ import {
   Button,
 } from "@mui/material";
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { DateChooser } from "../../../components/dateChooser";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -129,24 +127,12 @@ function Add() {
             </Box>
 
             <Box>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker
-                  label="date"
-                  value={formik.values.date}
-                  onChange={(newValue) => {
-                    formik.setFieldValue("date", newValue);
-                  }}
-                  id="date"
-                  name="date"
-                  renderInput={(params) => (
-                    <TextField
-                      sx={{ width: "100%" }}
-                      {...params}
-                      error={formik.errors.date && formik.touched.date}
-                    />
-                  )}
-                />
-              </LocalizationProvider>
+              <DateChooser
+                label={"Date"}
+                name={"date"}
+                formik={formik}
+                csx={{ width: "100%" }}
+              />
 
               <FormHelperText error={formik.errors.date && formik.touched.date}>
                 {" "}

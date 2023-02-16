@@ -1,8 +1,4 @@
-import { useState } from "react";
-
 import { Box, Button, Typography } from "@mui/material";
-
-import AddIcon from "@mui/icons-material/Add";
 
 import { DateChooser } from "../../../components/dateChooser";
 
@@ -12,9 +8,22 @@ import { MyTable } from "../../../components/myTable";
 import { FlexBox } from "../../../layouts/flexBox";
 
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 function SaleHistory() {
-  const [date, setDate] = useState(null);
+  const formik = useFormik({
+    initialValues: {
+      date: null,
+    },
+    validationSchema: Yup.object({
+      date: Yup.date()
+        .nullable()
+        .typeError("date is required")
+        .required("Date is required"),
+    }),
+    onSubmit: (values) => console.log(values),
+  });
 
   const navigate = useNavigate();
 
@@ -59,17 +68,17 @@ function SaleHistory() {
               Last {dateWiseSaleTrans.length} days
             </Typography>
           </Box>
-
-          <Box>
+          <Box component={"form"} onSubmit={formik.handleSubmit}>
             <DateChooser
               label={"Search by date"}
-              date={date}
-              setDate={setDate}
+              name={"date"}
+              formik={formik}
               csx={{ mr: 2, width: "175px" }}
+              size={"small"}
             />
 
-            <Button variant="contained" startIcon={<AddIcon />}>
-              Invest
+            <Button type="submit" variant="contained">
+              Search
             </Button>
           </Box>
         </FlexBox>
