@@ -6,19 +6,14 @@ import FlexBox from "../../../layouts/flexBox/FlexBox";
 import MyTable from "../../../components/myTable/MyTable";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { saleFormValSch } from "../../../lib/yup";
 
 function InvestmentHistory() {
   const formik = useFormik({
     initialValues: {
       date: null,
     },
-    validationSchema: Yup.object({
-      date: Yup.date()
-        .nullable()
-        .typeError("date is required")
-        .required("Date is required"),
-    }),
+    validationSchema: saleFormValSch,
     onSubmit: (values) => console.log(values),
   });
 

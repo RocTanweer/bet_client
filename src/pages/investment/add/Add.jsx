@@ -17,36 +17,10 @@ import { DateChooser } from "../../../components/dateChooser";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import { FlexBox } from "../../../layouts/flexBox";
 
-const FILE_SIZE = 262144000;
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
-
-const validationSchema = Yup.object({
-  investmentItem: Yup.string("Choose an investment item").required(
-    "This is required!"
-  ),
-  amount: Yup.number("Enter amount invested").required("This is required"),
-  payment: Yup.string("Choose payment method").required("This is required"),
-  date: Yup.date()
-    .nullable()
-    .typeError("date is required")
-    .required("Date is required"),
-  receiptImg: Yup.mixed()
-    .test(
-      "fileSize",
-      "File too large",
-      (value) => value === null || value.size <= FILE_SIZE
-    )
-    .test(
-      "fileFormat",
-      "Unsupported file type",
-      (value) => value === null || SUPPORTED_FORMATS.includes(value.type)
-    )
-    .notRequired(),
-});
+import { investmentFormValSch } from "../../../lib/yup";
 
 function Add() {
   const formik = useFormik({
@@ -57,7 +31,7 @@ function Add() {
       date: null,
       receiptImg: null,
     },
-    validationSchema: validationSchema,
+    validationSchema: investmentFormValSch,
     onSubmit: (values) => {
       console.log(values);
     },

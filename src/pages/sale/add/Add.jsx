@@ -11,19 +11,10 @@ import {
 import { DateChooser } from "../../../components/dateChooser";
 
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import { FlexBox } from "../../../layouts/flexBox";
 
-const validationSchema = Yup.object({
-  saleItem: Yup.string("Choose a sale item").required("This is required"),
-  unit: Yup.number("Enter number of units sold").required("This is required"),
-  amount: Yup.number("Enter sale amount").required("This is required"),
-  date: Yup.date()
-    .nullable()
-    .typeError("date is required")
-    .required("Date is required"),
-});
+import { saleFormValSch } from "../../../lib/yup";
 
 function Add() {
   const formik = useFormik({
@@ -33,7 +24,7 @@ function Add() {
       amount: "",
       date: null,
     },
-    validationSchema: validationSchema,
+    validationSchema: saleFormValSch,
     onSubmit: (values) => {
       console.log(values);
     },

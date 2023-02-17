@@ -9,19 +9,14 @@ import { FlexBox } from "../../../layouts/flexBox";
 
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
+import { historyFormValSch } from "../../../lib/yup/validationSchemas";
 
 function SaleHistory() {
   const formik = useFormik({
     initialValues: {
       date: null,
     },
-    validationSchema: Yup.object({
-      date: Yup.date()
-        .nullable()
-        .typeError("date is required")
-        .required("Date is required"),
-    }),
+    validationSchema: historyFormValSch,
     onSubmit: (values) => console.log(values),
   });
 
