@@ -1,5 +1,9 @@
 import App from "../../App";
 import { createBrowserRouter } from "react-router-dom";
+
+import { Login } from "../../pages/login";
+import { Register } from "../../pages/register";
+import { Profile } from "../../pages/profile";
 import { Dashboard } from "../../pages/dashboard";
 import { InvestmentHistory } from "../../pages/investment/history";
 import { SaleHistory } from "../../pages/sale/history";
@@ -16,6 +20,10 @@ const router = createBrowserRouter([
     element: <App />,
 
     children: [
+      {
+        path: "profile",
+        element: <Profile />,
+      },
       {
         path: "dashboard",
         element: <Dashboard />,
@@ -53,6 +61,14 @@ const router = createBrowserRouter([
         element: <AddSale />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "register",
+    element: <Register />,
   },
 ]);
 
