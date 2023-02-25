@@ -43,3 +43,15 @@ export const historyFormValSch = Yup.object({
     .typeError("date is required")
     .required("Date is required"),
 });
+
+export const loginFormValSch = Yup.object({
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
+
+export const registerFormValSch = Yup.object({
+  firstName: Yup.string().required("First Name is required").min(3).max(15),
+  lastName: Yup.string().required("Last Name is required").min(3).max(15),
+  email: Yup.string().email("Invalid email").required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});
