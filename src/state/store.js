@@ -1,3 +1,5 @@
+import { AES } from "crypto-js";
+
 import {
   userRegisterReducer,
   userLoginReducer,
@@ -32,11 +34,20 @@ export const rootReducer = combineReducers({
   userDetailsUpdate: userDetailsUpdateReducer,
 });
 
+const decryptedLoginToken =
+  localStorage.getItem("loginToken") &&
+  AES.decrypt(
+    localStorage.getItem("loginToken"),
+    import.meta.env.VITE_SANITY_SECRET
+  ).toString();
+
 export const initialState = {
   userRegister: {},
   userLogin: {},
   userLoginOAuth: {},
-  userDetails: {},
+  userDetails: {
+    loginToken: decryptedLoginToken,
+  },
   userLogout: {},
   userDetailsUpdate: {},
 };
