@@ -18,16 +18,24 @@ import {
   Typography,
 } from "@mui/material";
 
+import { useGlobalState } from "../../context/globalState";
+import { logout } from "../../state/actions/userActions";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 function Header() {
+  const { state, dispatch } = useGlobalState();
+
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const open = Boolean(anchorEl);
+  const {
+    userLogout: { loading: logoutLoading },
+  } = state;
 
   function handleMenuOpen(e) {
     setAnchorEl(e.currentTarget);
@@ -35,6 +43,15 @@ function Header() {
 
   function handleMenuClose() {
     setAnchorEl(null);
+  }
+
+  async function handleLogout() {
+    try {
+      await logout(dispatch);
+      setAnchorEl(null);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -121,11 +138,11 @@ function Header() {
 
               <Divider />
 
-              <MenuItem onClick={handleMenuClose}>
+              <MenuItem onClick={handleLogout}>
                 <ListItemIcon>
                   <LogoutIcon sx={{ mr: 1 }} />
                 </ListItemIcon>
-                Logout
+                {logoutLoading ? "Loading..." : "Logout"}
               </MenuItem>
             </Menu>
           </Box>
