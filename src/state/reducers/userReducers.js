@@ -13,6 +13,8 @@ export function userRegisterReducer(state = {}, action) {
 
     case AT.USER_REGISTER_DELETE:
       return {};
+    default:
+      return state;
   }
 }
 
@@ -29,6 +31,8 @@ export function userLoginReducer(state = {}, action) {
 
     case AT.USER_LOGIN_DELETE:
       return {};
+    default:
+      return state;
   }
 }
 
@@ -45,6 +49,8 @@ export function userLoginOAuthReducer(state = {}, action) {
 
     case AT.USER_LOGIN_OAUTH_DELETE:
       return {};
+    default:
+      return state;
   }
 }
 
@@ -61,6 +67,8 @@ export function userLogoutReducer(state = {}, action) {
 
     case AT.USER_LOGOUT_DELETE:
       return {};
+    default:
+      return state;
   }
 }
 
@@ -92,8 +100,10 @@ export function userDetailsReducer(state = {}, action) {
     case AT.USER_DETAILS_LOGIN_TOKEN:
       return { ...state, loginToken: action.payload.loginToken };
 
-    case USER_DETAILS_DELETE:
+    case AT.USER_DETAILS_DELETE:
       return {};
+    default:
+      return state;
   }
 }
 
@@ -107,5 +117,7 @@ export function userDetailsUpdateReducer(state = {}, action) {
 
     case AT.USER_DETAILS_UPDATE_FAIL:
       return { ...state, loading: false, error: true };
+    default:
+      return state;
   }
 }
