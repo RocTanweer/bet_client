@@ -2,21 +2,7 @@ import { useState } from "react";
 
 import { Nav } from "../../components/nav";
 
-import {
-  AppBar,
-  IconButton,
-  Toolbar,
-  Box,
-  Tooltip,
-  Avatar,
-  Stack,
-  Menu,
-  MenuItem,
-  Divider,
-  ListItemIcon,
-  Drawer,
-  Typography,
-} from "@mui/material";
+import { AppBar, IconButton, Toolbar, Box, Tooltip, Avatar, Stack, Menu, MenuItem, Divider, ListItemIcon, Drawer, Typography } from "@mui/material";
 
 import { useGlobalState } from "../../context/globalState";
 import { logout } from "../../state/actions/userActions";
@@ -25,6 +11,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { NavLink } from "react-router-dom";
 
 function Header() {
   const { state, dispatch } = useGlobalState();
@@ -53,7 +40,6 @@ function Header() {
       console.log(error);
     }
   }
-
   return (
     <AppBar
       position="static"
@@ -66,21 +52,11 @@ function Header() {
     >
       <Toolbar sx={{ justifyContent: { xs: "space-between", md: "flex-end" } }}>
         {/* Ham Button on small devices */}
-        <IconButton
-          onClick={() => setIsDrawerOpen(true)}
-          sx={{ display: { md: "none" } }}
-          color="inherit"
-        >
+        <IconButton onClick={() => setIsDrawerOpen(true)} sx={{ display: { md: "none" } }} color="inherit">
           <MenuIcon />
         </IconButton>
 
-        <Drawer
-          anchor="left"
-          variant="temporary"
-          open={isDrawerOpen}
-          onClose={() => setIsDrawerOpen(false)}
-          sx={{ display: { md: "none" } }}
-        >
+        <Drawer anchor="left" variant="temporary" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)} sx={{ display: { md: "none" } }}>
           <Toolbar />
           <Typography variant="h5" textAlign={"center"}>
             BET
@@ -90,27 +66,15 @@ function Header() {
 
         <Stack direction={"row"} alignItems="center">
           {/* Total balance */}
-          <IconButton
-            aria-label="Change theme"
-            color="inherit"
-            onClick={() => null}
-          >
+          <IconButton aria-label="Change theme" color="inherit" onClick={() => null}>
             <DarkModeIcon />
           </IconButton>
 
           {/* User settings with dropdown */}
           <Box>
             <Tooltip title="Open settings">
-              <IconButton
-                onClick={handleMenuOpen}
-                aria-controls={open ? "user-settings" : undefined}
-                aria-haspopup="true"
-                aria-expanded={open ? "true" : undefined}
-              >
-                <Avatar
-                  alt="user image"
-                  src="https://avatars.githubusercontent.com/u/71582699?v=4"
-                />
+              <IconButton onClick={handleMenuOpen} aria-controls={open ? "user-settings" : undefined} aria-haspopup="true" aria-expanded={open ? "true" : undefined}>
+                <Avatar alt="user image" src="https://avatars.githubusercontent.com/u/71582699?v=4" />
               </IconButton>
             </Tooltip>
 
@@ -129,7 +93,7 @@ function Header() {
               open={open}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={handleMenuClose}>
+              <MenuItem component={NavLink} to={"/profile"} onClick={handleMenuClose}>
                 <ListItemIcon>
                   <AccountCircleIcon sx={{ mr: 1 }} />
                 </ListItemIcon>
