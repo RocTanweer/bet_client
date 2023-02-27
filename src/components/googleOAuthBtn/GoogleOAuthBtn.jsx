@@ -1,6 +1,5 @@
 import { useGoogleLogin } from "@react-oauth/google";
 
-import { useNavigate, useLocation } from "react-router-dom";
 import { useGlobalState } from "../../context/globalState";
 
 import { oAuthLogin } from "../../state/actions/userActions";
@@ -10,8 +9,6 @@ import GoogleIcon from "@mui/icons-material/Google";
 import { Button } from "@mui/material";
 
 function GoogleOAuthBtn() {
-  const navigate = useNavigate();
-  const { state: locState } = useLocation();
   const { state, dispatch } = useGlobalState();
 
   const {
@@ -31,12 +28,7 @@ function GoogleOAuthBtn() {
   });
 
   return (
-    <Button
-      type="button"
-      variant="outlined"
-      startIcon={!oAuthLoading && <GoogleIcon />}
-      onClick={() => googleLogin()}
-    >
+    <Button type="button" variant="outlined" startIcon={!oAuthLoading && <GoogleIcon />} onClick={() => googleLogin()}>
       {oAuthLoading ? "Loading..." : "Login with Google"}
     </Button>
   );
