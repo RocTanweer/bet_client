@@ -17,20 +17,14 @@ export async function oAuthLogin(accessToken, dispatch) {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
 
-    const { data: userInfo } = await axios.get(
-      import.meta.env.VITE_GOOGLE_OAUTH_USERINFO_URL,
-      config
-    );
+    const { data: userInfo } = await axios.get(import.meta.env.VITE_GOOGLE_OAUTH_USERINFO_URL, config);
 
     dispatch({
       type: AT.USER_DETAILS_LOGIN_TOKEN,
       payload: { loginToken: userInfo.sub },
     });
 
-    const encryptedLoginToken = AES.encrypt(
-      userInfo.sub,
-      import.meta.env.VITE_SANITY_SECRET
-    ).toString();
+    const encryptedLoginToken = AES.encrypt(userInfo.sub, import.meta.env.VITE_SANITY_SECRET).toString();
 
     localStorage.setItem("loginToken", encryptedLoginToken);
 
@@ -38,7 +32,7 @@ export async function oAuthLogin(accessToken, dispatch) {
 
     const userDetails = await client.createIfNotExists(userDoc);
 
-    dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { userDetails } });
+    dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: userDetails } });
 
     dispatch({ type: AT.USER_LOGIN_OAUTH_SUCCESS });
   } catch (error) {
@@ -52,7 +46,7 @@ export async function logout(dispatch) {
     dispatch({ type: AT.USER_LOGOUT_REQUEST });
 
     await sleep(1000);
-    localStorage.removeItem("loginKey");
+    localStorage.removeItem("loginToken");
 
     dispatch({ type: AT.USER_REGISTER_DELETE });
 
@@ -66,6 +60,22 @@ export async function logout(dispatch) {
     dispatch({ type: AT.USER_DETAILS_DELETE });
   } catch (error) {
     dispatch({ type: AT.USER_LOGOUT_FAIL });
+    throw error;
+  }
+}
+
+export async function getUserDetails(loginToken, dispatch) {
+  try {
+    dispatch({ type: AT.USER_DETAILS_REQUEST });
+
+    const query = `*[_type == "user" && _id=="${loginToken}"]`;
+
+    const response = await client.fetch(query);
+
+    dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: response[0] } });
+  } catch (error) {
+    console.log(error);
+    dispatch({ type: AT.USER_DETAILS_FAIL });
     throw error;
   }
 }
