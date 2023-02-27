@@ -81,8 +81,8 @@ export function userDetailsReducer(state = {}, action) {
       return {
         ...state,
         loading: false,
-        userDetails: action.payload.userDetails,
-        editUserDetails: action.payload.userDetails,
+        info: action.payload.info,
+        editInfo: action.payload.info,
       };
 
     case AT.USER_DETAILS_FAIL:
@@ -101,7 +101,7 @@ export function userDetailsReducer(state = {}, action) {
       return { ...state, loginToken: action.payload.loginToken };
 
     case AT.USER_DETAILS_DELETE:
-      return {};
+      return { loading: true };
     default:
       return state;
   }
