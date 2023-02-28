@@ -9,6 +9,38 @@ import { client } from "../../lib/sanityClient";
 import { formatUserInfo } from "../../utils";
 import { sleep } from "../../utils/others";
 
+export async function register(userDoc, dispatch) {
+  try {
+    dispatch({ type: AT.USER_REGISTER_REQUEST });
+
+    const query = `*[_type == "user" && email=="${userDoc.email}"]`;
+
+    const existingUser = await client.fetch(query);
+
+    if (existingUser.length == 0) {
+      const response = await client.create({ _type: "user", ...userDoc });
+
+      dispatch({
+        type: AT.USER_DETAILS_LOGIN_TOKEN,
+        payload: { loginToken: response._id },
+      });
+
+      dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: response } });
+
+      const encryptedLoginToken = AES.encrypt(response._id, import.meta.env.VITE_SANITY_SECRET).toString();
+
+      localStorage.setItem("loginToken", encryptedLoginToken);
+
+      dispatch({ type: AT.USER_REGISTER_SUCCESS });
+    } else {
+      throw new Error("User already exists!");
+    }
+  } catch (error) {
+    dispatch({ type: AT.USER_REGISTER_FAIL });
+    throw error;
+  }
+}
+
 export async function oAuthLogin(accessToken, dispatch) {
   try {
     dispatch({ type: AT.USER_LOGIN_OAUTH_REQUEST });
