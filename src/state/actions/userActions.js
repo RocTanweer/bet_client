@@ -2,12 +2,10 @@ import * as AT from "../actionTypes/userActionTypes";
 
 import axios from "axios";
 
-import { AES } from "crypto-js";
-
 import { client } from "../../lib/sanityClient";
 
 import { formatUserInfo } from "../../utils";
-import { sleep } from "../../utils/others";
+import { encryptString, sleep } from "../../utils/others";
 
 export async function register(userDoc, dispatch) {
   try {
@@ -18,7 +16,13 @@ export async function register(userDoc, dispatch) {
     const existingUser = await client.fetch(query);
 
     if (existingUser.length == 0) {
-      const response = await client.create({ _type: "user", ...userDoc });
+      const sanityUserDoc = {
+        _type: "user",
+        ...userDoc,
+        password: encryptString(userDoc.password),
+      };
+
+      const response = await client.create(sanityUserDoc);
 
       dispatch({
         type: AT.USER_DETAILS_LOGIN_TOKEN,
@@ -27,9 +31,7 @@ export async function register(userDoc, dispatch) {
 
       dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: response } });
 
-      const encryptedLoginToken = AES.encrypt(response._id, import.meta.env.VITE_SANITY_SECRET).toString();
-
-      localStorage.setItem("loginToken", encryptedLoginToken);
+      localStorage.setItem("loginToken", encryptString(response._id));
 
       dispatch({ type: AT.USER_REGISTER_SUCCESS });
     } else {
@@ -56,9 +58,7 @@ export async function oAuthLogin(accessToken, dispatch) {
       payload: { loginToken: userInfo.sub },
     });
 
-    const encryptedLoginToken = AES.encrypt(userInfo.sub, import.meta.env.VITE_SANITY_SECRET).toString();
-
-    localStorage.setItem("loginToken", encryptedLoginToken);
+    localStorage.setItem("loginToken", encryptString(userInfo.sub));
 
     const userDoc = formatUserInfo(userInfo);
 
