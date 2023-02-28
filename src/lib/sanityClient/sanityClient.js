@@ -6,5 +6,5 @@ export const client = createClient({
   apiVersion: import.meta.env.VITE_SANITY_PROJECT_API_VERSION,
   token: import.meta.env.VITE_SANITY_PROJECT_TOKEN,
   ignoreBrowserTokenWarning: true,
-  useCdn: true,
+  useCdn: false,
 });
