@@ -37,7 +37,7 @@ function Profile() {
         "Loading..."
       ) : (
         <Box component={Paper} sx={{ padding: "20px 40px" }}>
-          <Avatar alt="user Image" src={userInfo.profilePicURL.replace("96", "200")} sx={{ width: "200px", height: "200px", mb: 2 }} />
+          <Avatar alt="user Image" src={userInfo.profilePicURL?.replace("96", "200")} sx={{ width: "200px", height: "200px", mb: 2 }} />
           <Box>
             <Typography variant="subtitle2" color={"primary"}>
               Your name
