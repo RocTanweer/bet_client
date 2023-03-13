@@ -1,4 +1,13 @@
-import { Box, Stack, Typography, TextField, Button, Divider, FormHelperText } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  FormHelperText,
+  CircularProgress,
+} from "@mui/material";
 
 import { FlexBox } from "../../layouts/flexBox";
 import { Navigate, NavLink, useLocation } from "react-router-dom";
@@ -16,6 +25,7 @@ function Login() {
 
   const {
     userDetails: { loginToken },
+    userLogin: { loading: loggingLoading },
   } = state;
 
   const formik = useFormik({
@@ -28,14 +38,22 @@ function Login() {
       try {
         await login(values, dispatch);
       } catch (error) {
-        console.log(error);
+        const { field, value } = error.cause;
+        formik.setFieldError(field, value);
       }
     },
   });
 
   return (
     <>
-      {loginToken && <Navigate to={locState?.prevPath === undefined ? "/dashboard" : locState.prevPath} replace={true} />}
+      {loginToken && (
+        <Navigate
+          to={
+            locState?.prevPath === undefined ? "/dashboard" : locState.prevPath
+          }
+          replace={true}
+        />
+      )}
 
       <FlexBox csx={{ minHeight: "100vh" }}>
         <Box sx={{ maxWidth: "530px", width: "100%", height: "auto" }}>
@@ -54,8 +72,12 @@ function Login() {
                 onChange={formik.handleChange}
                 error={formik.errors.email && formik.touched.email}
               />
-              <FormHelperText error={formik.errors.email && formik.touched.email}>
-                {formik.errors.email && formik.touched.email && formik.errors.email}
+              <FormHelperText
+                error={formik.errors.email && formik.touched.email}
+              >
+                {formik.errors.email &&
+                  formik.touched.email &&
+                  formik.errors.email}
               </FormHelperText>
             </Box>
 
@@ -69,13 +91,23 @@ function Login() {
                 onChange={formik.handleChange}
                 error={formik.errors.password && formik.touched.password}
               />
-              <FormHelperText error={formik.errors.password && formik.touched.password}>
-                {formik.errors.password && formik.touched.password && formik.errors.password}
+              <FormHelperText
+                error={formik.errors.password && formik.touched.password}
+              >
+                {formik.errors.password &&
+                  formik.touched.password &&
+                  formik.errors.password}
               </FormHelperText>
             </Box>
 
             <Button type="submit" variant="contained" fullWidth>
-              Login
+              {loggingLoading ? (
+                <>
+                  <CircularProgress color="grey" size={24.5} />
+                </>
+              ) : (
+                "Login"
+              )}
             </Button>
 
             <FlexBox csx={{ gap: 1, justifyContent: "flex-start" }}>
@@ -85,7 +117,12 @@ function Login() {
               </Typography>
             </FlexBox>
 
-            <Divider orientation="horizontal" variant="subtitle2" flexItem sx={{ color: "text.secondary" }}>
+            <Divider
+              orientation="horizontal"
+              variant="subtitle2"
+              flexItem
+              sx={{ color: "text.secondary" }}
+            >
               Or
             </Divider>
 
