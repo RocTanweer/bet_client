@@ -1,4 +1,17 @@
-import { Box, Stack, Typography, TextField, Button, Divider, FormHelperText, Checkbox, FormGroup, FormControlLabel, Modal } from "@mui/material";
+import {
+  Box,
+  Stack,
+  Typography,
+  TextField,
+  Button,
+  Divider,
+  FormHelperText,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+  Modal,
+  CircularProgress,
+} from "@mui/material";
 
 import { FlexBox } from "../../layouts/flexBox";
 import { Navigate, NavLink } from "react-router-dom";
@@ -18,6 +31,7 @@ function Register() {
 
   const {
     userDetails: { loginToken },
+    userRegister: { loading: registerLoading },
   } = state;
 
   const formik = useFormik({
@@ -33,7 +47,8 @@ function Register() {
       try {
         await register({ ...values }, dispatch);
       } catch (error) {
-        console.log(error);
+        const { field, value } = error.cause;
+        formik.setFieldError(field, value);
       }
     },
   });
@@ -60,8 +75,12 @@ function Register() {
                   onChange={formik.handleChange}
                   error={formik.errors.firstName && formik.touched.firstName}
                 />
-                <FormHelperText error={formik.errors.firstName && formik.touched.firstName}>
-                  {formik.errors.firstName && formik.touched.firstName && formik.errors.firstName}
+                <FormHelperText
+                  error={formik.errors.firstName && formik.touched.firstName}
+                >
+                  {formik.errors.firstName &&
+                    formik.touched.firstName &&
+                    formik.errors.firstName}
                 </FormHelperText>
               </Box>
 
@@ -75,8 +94,12 @@ function Register() {
                   onChange={formik.handleChange}
                   error={formik.errors.lastName && formik.touched.lastName}
                 />
-                <FormHelperText error={formik.errors.lastName && formik.touched.lastName}>
-                  {formik.errors.lastName && formik.touched.lastName && formik.errors.lastName}
+                <FormHelperText
+                  error={formik.errors.lastName && formik.touched.lastName}
+                >
+                  {formik.errors.lastName &&
+                    formik.touched.lastName &&
+                    formik.errors.lastName}
                 </FormHelperText>
               </Box>
             </FlexBox>
@@ -91,8 +114,12 @@ function Register() {
                 onChange={formik.handleChange}
                 error={formik.errors.email && formik.touched.email}
               />
-              <FormHelperText error={formik.errors.email && formik.touched.email}>
-                {formik.errors.email && formik.touched.email && formik.errors.email}
+              <FormHelperText
+                error={formik.errors.email && formik.touched.email}
+              >
+                {formik.errors.email &&
+                  formik.touched.email &&
+                  formik.errors.email}
               </FormHelperText>
             </Box>
 
@@ -106,8 +133,12 @@ function Register() {
                 onChange={formik.handleChange}
                 error={formik.errors.password && formik.touched.password}
               />
-              <FormHelperText error={formik.errors.password && formik.touched.password}>
-                {formik.errors.password && formik.touched.password && formik.errors.password}
+              <FormHelperText
+                error={formik.errors.password && formik.touched.password}
+              >
+                {formik.errors.password &&
+                  formik.touched.password &&
+                  formik.errors.password}
               </FormHelperText>
             </Box>
 
@@ -116,23 +147,47 @@ function Register() {
                 id={"isAgreed"}
                 name={"isAgreed"}
                 onChange={formik.handleChange}
-                control={<Checkbox sx={{ color: formik.errors.isAgreed && formik.touched.isAgreed && "error.main" }} checked={formik.values.isAgreed} />}
+                control={
+                  <Checkbox
+                    sx={{
+                      color:
+                        formik.errors.isAgreed &&
+                        formik.touched.isAgreed &&
+                        "error.main",
+                    }}
+                    checked={formik.values.isAgreed}
+                  />
+                }
                 label={
                   <>
                     I agree to{" "}
                     {
-                      <Button disableRipple size="small" onClick={() => setIsModalOpen(true)} sx={{ textDecoration: "underline" }}>
+                      <Button
+                        disableRipple
+                        size="small"
+                        onClick={() => setIsModalOpen(true)}
+                        sx={{ textDecoration: "underline" }}
+                      >
                         Terms & Conditions
                       </Button>
                     }
                   </>
                 }
               />
-              <FormHelperText error={formik.errors.isAgreed && formik.touched.isAgreed}>
-                {formik.errors.isAgreed && formik.touched.isAgreed && formik.errors.isAgreed}
+              <FormHelperText
+                error={formik.errors.isAgreed && formik.touched.isAgreed}
+              >
+                {formik.errors.isAgreed &&
+                  formik.touched.isAgreed &&
+                  formik.errors.isAgreed}
               </FormHelperText>
 
-              <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} aria-labelledby="" aria-describedby="">
+              <Modal
+                open={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                aria-labelledby=""
+                aria-describedby=""
+              >
                 <Box
                   sx={{
                     position: "absolute",
@@ -149,8 +204,9 @@ function Register() {
                     Terms and Conditions
                   </Typography>
                   <Typography mb={1}>
-                    In the incident of forgetting the password, the user account will not be recovered. In other words, the <b>forgot password</b> feature is not
-                    implemented
+                    In the incident of forgetting the password, the user account
+                    will not be recovered. In other words, the{" "}
+                    <b>forgot password</b> feature is not implemented
                   </Typography>
                   <Typography>
                     We recommend using <b>google</b> to register
@@ -160,7 +216,13 @@ function Register() {
             </FormGroup>
 
             <Button type="submit" variant="contained" fullWidth>
-              Register
+              {registerLoading ? (
+                <>
+                  <CircularProgress color="grey" size={24.5} />
+                </>
+              ) : (
+                "Register"
+              )}
             </Button>
 
             <FlexBox csx={{ gap: 1, justifyContent: "flex-start" }}>
@@ -170,7 +232,12 @@ function Register() {
               </Typography>
             </FlexBox>
 
-            <Divider orientation="horizontal" variant="subtitle2" flexItem sx={{ color: "text.secondary" }}>
+            <Divider
+              orientation="horizontal"
+              variant="subtitle2"
+              flexItem
+              sx={{ color: "text.secondary" }}
+            >
               Or
             </Divider>
 
