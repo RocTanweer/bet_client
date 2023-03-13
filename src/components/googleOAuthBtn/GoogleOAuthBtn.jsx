@@ -6,9 +6,11 @@ import { oAuthLogin } from "../../state/actions/userActions";
 
 import GoogleIcon from "@mui/icons-material/Google";
 
-import { Button } from "@mui/material";
+import { Box, Button, FormHelperText, CircularProgress } from "@mui/material";
+import { useState } from "react";
 
 function GoogleOAuthBtn() {
+  const [errMsg, setErrMsg] = useState("");
   const { state, dispatch } = useGlobalState();
 
   const {
@@ -20,7 +22,7 @@ function GoogleOAuthBtn() {
       try {
         await oAuthLogin(tokenResponse.access_token, dispatch);
       } catch (error) {
-        console.log(error);
+        setErrMsg(error.message);
       }
     },
     ///// Work here \\\\\
@@ -28,9 +30,27 @@ function GoogleOAuthBtn() {
   });
 
   return (
-    <Button type="button" variant="outlined" startIcon={!oAuthLoading && <GoogleIcon />} onClick={() => googleLogin()}>
-      {oAuthLoading ? "Loading..." : "Login with Google"}
-    </Button>
+    <Box>
+      <Button
+        type="button"
+        variant="outlined"
+        color={errMsg ? "error" : "primary"}
+        fullWidth
+        startIcon={!oAuthLoading && <GoogleIcon />}
+        onClick={() => googleLogin()}
+      >
+        {oAuthLoading ? (
+          <>
+            <CircularProgress color="grey" size={24.5} />
+          </>
+        ) : (
+          "Login with google"
+        )}
+      </Button>
+      <FormHelperText error={Boolean(errMsg)}>
+        {errMsg && errMsg}
+      </FormHelperText>
+    </Box>
   );
 }
 
