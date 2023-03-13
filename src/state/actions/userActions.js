@@ -36,13 +36,29 @@ export async function register(userDoc, dispatch) {
       localStorage.setItem("loginToken", encryptString(response._id));
 
       dispatch({ type: AT.USER_REGISTER_SUCCESS });
-    } else if (existingUser.length !== 0 && existingUser[0].loginType === "manual") {
-      throw new Error("User already exists with this email, please try logging in using login form");
+    } else if (
+      existingUser.length !== 0 &&
+      existingUser[0].loginType === "manual"
+    ) {
+      throw new Error(null, {
+        cause: {
+          field: "email",
+          value:
+            "User already exists with this email, please try logging in using login form",
+        },
+      });
     } else {
-      throw new Error("User already exists with this email, please try logging in using google");
+      throw new Error(null, {
+        cause: {
+          field: "email",
+          value:
+            "User already exists with this email, please try logging in using google",
+        },
+      });
     }
   } catch (error) {
     dispatch({ type: AT.USER_REGISTER_FAIL });
+    // Handle promise failing error \\
     throw error;
   }
 }
@@ -56,12 +72,24 @@ export async function login(userCred, dispatch) {
     const existingUser = await client.fetch(query);
 
     if (existingUser.length === 0) {
-      throw new Error("No user exist with this email");
-    } else if (existingUser.length !== 0 && existingUser[0].loginType === "gOAuth") {
-      throw new Error("Oops, you registered using Google, please continue with it");
+      throw new Error(null, {
+        cause: { field: "email", value: "No user exists with this email" },
+      });
+    } else if (
+      existingUser.length !== 0 &&
+      existingUser[0].loginType === "gOAuth"
+    ) {
+      throw new Error(null, {
+        cause: {
+          field: "email",
+          value: "Oops, you registered using Google, please continue with it",
+        },
+      });
     }
 
-    const existingUserDecryptedPassword = decryptString(existingUser[0].password);
+    const existingUserDecryptedPassword = decryptString(
+      existingUser[0].password
+    );
 
     if (existingUserDecryptedPassword === userCred.password) {
       dispatch({
@@ -69,13 +97,18 @@ export async function login(userCred, dispatch) {
         payload: { loginToken: existingUser[0]._id },
       });
 
-      dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: existingUser[0] } });
+      dispatch({
+        type: AT.USER_DETAILS_SUCCESS,
+        payload: { info: existingUser[0] },
+      });
 
       localStorage.setItem("loginToken", encryptString(existingUser[0]._id));
 
       dispatch({ type: AT.USER_LOGIN_SUCCESS });
     } else {
-      throw new Error("Wrong password");
+      throw new Error(null, {
+        cause: { field: "password", value: "Wrong password, please try again" },
+      });
     }
   } catch (error) {
     dispatch({ type: AT.USER_LOGIN_FAIL });
@@ -91,7 +124,10 @@ export async function oAuthLogin(accessToken, dispatch) {
       headers: { Authorization: `Bearer ${accessToken}` },
     };
 
-    const { data: userInfo } = await axios.get(import.meta.env.VITE_GOOGLE_OAUTH_USERINFO_URL, config);
+    const { data: userInfo } = await axios.get(
+      import.meta.env.VITE_GOOGLE_OAUTH_USERINFO_URL,
+      config
+    );
 
     const query = `*[_type == "user" && email=="${userInfo.email}"]`;
 
@@ -102,10 +138,15 @@ export async function oAuthLogin(accessToken, dispatch) {
     if (existingUser.length === 0) {
       const userDoc = formatUserInfo(userInfo);
       userDetails = await client.create(userDoc);
-    } else if (existingUser.length !== 0 && existingUser.loginType === "gOAuth") {
+    } else if (
+      existingUser.length !== 0 &&
+      existingUser[0].loginType === "gOAuth"
+    ) {
       userDetails = existingUser[0];
     } else {
-      throw new Error("User exist with this email, please try logging in using login form");
+      throw new Error(
+        "User exist with this email, please try logging in using login form"
+      );
     }
 
     dispatch({
@@ -159,6 +200,46 @@ export async function getUserDetails(loginToken, dispatch) {
   } catch (error) {
     console.log(error);
     dispatch({ type: AT.USER_DETAILS_FAIL });
+    throw error;
+  }
+}
+
+export async function updateUserDetails(loginToken, mutatedObj, dispatch) {
+  try {
+    // Handle deletion of prev profilePic \\
+    dispatch({ type: AT.USER_DETAILS_UPDATE_REQUEST });
+
+    let newProfilePicId;
+    if (mutatedObj.profilePic) {
+      const response = await client.assets.upload(
+        "image",
+        mutatedObj.profilePic
+      );
+      newProfilePicId = response._id;
+    }
+
+    delete mutatedObj.profilePic;
+
+    const updated = {
+      ...mutatedObj,
+    };
+
+    if (newProfilePicId) {
+      updated.profilePic = {
+        _type: "image",
+        asset: {
+          _type: "reference",
+          _ref: newProfilePicId,
+        },
+      };
+    }
+
+    const data = await client.patch(loginToken).set(updated).commit();
+
+    dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: data } });
+    dispatch({ type: AT.USER_DETAILS_UPDATE_SUCCESS });
+  } catch (error) {
+    dispatch({ type: AT.USER_DETAILS_UPDATE_FAIL });
     throw error;
   }
 }
