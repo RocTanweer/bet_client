@@ -1,8 +1,5 @@
 import * as Yup from "yup";
 
-const FILE_SIZE = 262144000;
-const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
-
 export const investmentFormValSch = Yup.object({
   investmentItem: Yup.string("Choose an investment item").required(
     "This is required!"
@@ -58,18 +55,7 @@ export const registerFormValSch = Yup.object({
 });
 
 export const profileDetailsEditFormValSch = Yup.object({
-  profilePic: Yup.mixed()
-    .test(
-      "fileSize",
-      "File too large",
-      (value) => value === null || value.size <= FILE_SIZE
-    )
-    .test(
-      "fileFormat",
-      "Unsupported file type",
-      (value) => value === null || SUPPORTED_FORMATS.includes(value.type)
-    )
-    .notRequired(),
+  profilePic: Yup.mixed().notRequired(),
   firstName: Yup.string().required("First Name is required").min(3).max(15),
   lastName: Yup.string().required("Last Name is required").min(3).max(15),
   email: Yup.string().email("Invalid email").required("Email is required"),
