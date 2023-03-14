@@ -5,6 +5,7 @@ import { FlexBox } from "../../layouts/flexBox";
 import { useGlobalState } from "../../context/globalState";
 import { useEffect } from "react";
 import { getUserDetails } from "../../state/actions/userActions";
+import { urlFor } from "../../lib/sanityClient/sanityClient";
 
 function ProfileDetails({ setIsEditing }) {
   const { state, dispatch } = useGlobalState();
@@ -44,7 +45,10 @@ function ProfileDetails({ setIsEditing }) {
           <Box sx={{ width: "100%" }}>
             <Avatar
               alt="user Image"
-              src={userInfo.profilePicURL?.replace("96", "200")}
+              src={
+                userInfo?.profilePicURL?.replace("96", "200") ||
+                urlFor(userInfo?.profilePic).url()
+              }
               sx={{
                 width: "200px",
                 height: "200px",
