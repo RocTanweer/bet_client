@@ -27,6 +27,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { NavLink } from "react-router-dom";
+import { urlFor } from "../../lib/sanityClient/sanityClient";
 
 function Header() {
   const { state, dispatch } = useGlobalState();
@@ -38,7 +39,7 @@ function Header() {
 
   const {
     userLogout: { loading: logoutLoading },
-    userDetails: { info: userInfo },
+    userDetails: { info: userInfo, loading: userLoading },
   } = state;
 
   function handleMenuOpen(e) {
@@ -110,7 +111,15 @@ function Header() {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
-                <Avatar alt="user image" src={userInfo?.profilePicURL} />
+                <Avatar
+                  alt="user image"
+                  src={
+                    userLoading
+                      ? null
+                      : userInfo?.profilePicURL?.replace("96", "200") ||
+                        urlFor(userInfo?.profilePic).url()
+                  }
+                />
               </IconButton>
             </Tooltip>
 
