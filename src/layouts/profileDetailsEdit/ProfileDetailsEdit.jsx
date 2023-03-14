@@ -25,6 +25,7 @@ import {
   Image,
 } from "./profileDetailsEdit.styled";
 import { useFormik } from "formik";
+import { urlFor } from "../../lib/sanityClient/sanityClient";
 
 function ProfileDetailsEdit({ setIsEditing }) {
   const [prevImage, setPrevImage] = useState("");
@@ -37,7 +38,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
 
   const formik = useFormik({
     initialValues: {
-      profilePic: editInfo?.profilePic,
+      profilePic: editInfo.profilePic,
       firstName: editInfo.firstName,
       lastName: editInfo.lastName,
       email: editInfo.email,
@@ -47,7 +48,9 @@ function ProfileDetailsEdit({ setIsEditing }) {
     onSubmit: async (values) => {
       try {
         const mutatedFields = filterKeyValuePair(values, info);
+        // fix validation \\
         await updateUserDetails(loginToken, mutatedFields, dispatch);
+        setIsEditing(false);
       } catch (error) {
         console.log(error);
       }
@@ -101,7 +104,9 @@ function ProfileDetailsEdit({ setIsEditing }) {
           />
           <ImageSrc
             style={{
-              backgroundImage: `url(${prevImage})`,
+              backgroundImage: `url(${
+                prevImage || urlFor(editInfo.profilePic).url()
+              })`,
             }}
           />
           <ImageBackdrop className="MuiImageBackdrop-root" />
