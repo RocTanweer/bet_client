@@ -82,20 +82,10 @@ export function userDetailsReducer(state = {}, action) {
         ...state,
         loading: false,
         info: action.payload.info,
-        editInfo: action.payload.info,
       };
 
     case AT.USER_DETAILS_FAIL:
       return { ...state, loading: false, error: true };
-
-    case AT.USER_DETAILS_EDIT:
-      return {
-        ...state,
-        editUserDetails: {
-          ...state.editUserDetails,
-          [action.payload.fieldName]: action.payload.fieldValue,
-        },
-      };
 
     case AT.USER_DETAILS_LOGIN_TOKEN:
       return { ...state, loginToken: action.payload.loginToken };

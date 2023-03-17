@@ -34,17 +34,17 @@ function ProfileDetailsEdit({ setIsEditing }) {
   const { state, dispatch } = useGlobalState();
 
   const {
-    userDetails: { editInfo, info, loginToken },
+    userDetails: { info: userInfo, loginToken },
     userDetailsUpdate: { loading: updateLoading },
   } = state;
 
   const formik = useFormik({
     initialValues: {
-      profilePic: editInfo.profilePic,
-      firstName: editInfo.firstName,
-      lastName: editInfo.lastName,
-      email: editInfo.email,
-      password: editInfo.password,
+      profilePic: userInfo.profilePic,
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      email: userInfo.email,
+      password: userInfo.password,
     },
     validationSchema: profileDetailsEditFormValSch,
     onSubmit: async (values) => {
@@ -54,7 +54,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
         const dataForUpdation = {
           mutatedObj: mutatedFields,
           prevProfilePicId:
-            mutatedFields.profilePic && editInfo.profilePic?.asset._ref,
+            mutatedFields.profilePic && userInfo.profilePic?.asset._ref,
         };
 
         if (Object.keys(mutatedFields).length !== 0) {
@@ -115,7 +115,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
           <ImageSrc
             style={{
               backgroundImage: `url(${
-                prevImage || urlFor(editInfo.profilePic).url()
+                prevImage || urlFor(userInfo.profilePic).url()
               })`,
             }}
           />
