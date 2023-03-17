@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   FormHelperText,
+  CircularProgress,
 } from "@mui/material";
 
 import { FlexBox } from "../flexBox";
@@ -34,6 +35,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
 
   const {
     userDetails: { editInfo, info, loginToken },
+    userDetailsUpdate: { loading: updateLoading },
   } = state;
 
   const formik = useFormik({
@@ -48,8 +50,16 @@ function ProfileDetailsEdit({ setIsEditing }) {
     onSubmit: async (values) => {
       try {
         const mutatedFields = filterKeyValuePair(values, info);
-        // fix validation \\
-        await updateUserDetails(loginToken, mutatedFields, dispatch);
+
+        const dataForUpdation = {
+          mutatedObj: mutatedFields,
+          prevProfilePicId:
+            mutatedFields.profilePic && editInfo.profilePic?.asset._ref,
+        };
+
+        if (Object.keys(mutatedFields).length !== 0) {
+          await updateUserDetails(loginToken, dataForUpdation, dispatch);
+        }
         setIsEditing(false);
       } catch (error) {
         console.log(error);
@@ -197,7 +207,13 @@ function ProfileDetailsEdit({ setIsEditing }) {
           Cancel
         </Button>
         <Button variant="contained" type="submit">
-          Save
+          {updateLoading ? (
+            <>
+              <CircularProgress color="grey" size={24.5} />
+            </>
+          ) : (
+            "Save"
+          )}
         </Button>
       </Box>
     </Stack>
