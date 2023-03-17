@@ -204,37 +204,30 @@ export async function getUserDetails(loginToken, dispatch) {
   }
 }
 
-export async function updateUserDetails(loginToken, mutatedObj, dispatch) {
+export async function updateUserDetails(loginToken, dataForUpdation, dispatch) {
   try {
-    // Handle deletion of prev profilePic \\
     dispatch({ type: AT.USER_DETAILS_UPDATE_REQUEST });
 
-    let newProfilePicId;
+    const { mutatedObj, prevProfilePicId } = dataForUpdation;
+
     if (mutatedObj.profilePic) {
       const response = await client.assets.upload(
         "image",
         mutatedObj.profilePic
       );
-      newProfilePicId = response._id;
-    }
 
-    delete mutatedObj.profilePic;
-
-    const updated = {
-      ...mutatedObj,
-    };
-
-    if (newProfilePicId) {
-      updated.profilePic = {
+      mutatedObj.profilePic = {
         _type: "image",
         asset: {
           _type: "reference",
-          _ref: newProfilePicId,
+          _ref: response._id,
         },
       };
     }
 
-    const data = await client.patch(loginToken).set(updated).commit();
+    const data = await client.patch(loginToken).set(mutatedObj).commit();
+
+    if (prevProfilePicId) await client.delete(prevProfilePicId);
 
     dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: data } });
     dispatch({ type: AT.USER_DETAILS_UPDATE_SUCCESS });
