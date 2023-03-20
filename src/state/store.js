@@ -1,4 +1,4 @@
-import { decryptString } from "../utils/others";
+import { decryptString } from "../utils/functions";
 
 import {
   userRegisterReducer,
@@ -34,7 +34,9 @@ export const rootReducer = combineReducers({
   userDetailsUpdate: userDetailsUpdateReducer,
 });
 
-const decryptedLoginToken = localStorage.getItem("loginToken") && decryptString(localStorage.getItem("loginToken"));
+const decryptedLoginToken =
+  localStorage.getItem("loginToken") &&
+  decryptString(localStorage.getItem("loginToken"));
 
 export const initialState = {
   userRegister: {},

@@ -46,8 +46,10 @@ function ProfileDetails({ setIsEditing }) {
             <Avatar
               alt="user Image"
               src={
-                userInfo?.profilePicURL?.replace("96", "200") ||
-                urlFor(userInfo?.profilePic).url()
+                !userInfo.profilePic
+                  ? null
+                  : userInfo?.profilePicURL?.replace("96", "200") ||
+                    urlFor(userInfo.profilePic).url()
               }
               sx={{
                 width: "200px",

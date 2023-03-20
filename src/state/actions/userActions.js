@@ -4,8 +4,8 @@ import axios from "axios";
 
 import { client } from "../../lib/sanityClient";
 
-import { formatUserInfo } from "../../utils";
-import { decryptString, encryptString, sleep } from "../../utils/others";
+import { formatUserInfo } from "../../utils/functions";
+import { decryptString, encryptString, sleep } from "../../utils/functions";
 
 export async function register(userDoc, dispatch) {
   try {

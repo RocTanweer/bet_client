@@ -17,7 +17,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { profileDetailsEditFormValSch } from "../../lib/yup/validationSchemas";
 import { updateUserDetails } from "../../state/actions/userActions";
 import { useGlobalState } from "../../context/globalState";
-import { resizeFile, filterKeyValuePair } from "../../utils/others";
+import { resizeFile, filterKeyValuePair } from "../../utils/functions";
 
 import {
   ImageButton,
@@ -49,7 +49,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
     validationSchema: profileDetailsEditFormValSch,
     onSubmit: async (values) => {
       try {
-        const mutatedFields = filterKeyValuePair(values, info);
+        const mutatedFields = filterKeyValuePair(values, userInfo);
 
         const dataForUpdation = {
           mutatedObj: mutatedFields,
@@ -115,7 +115,8 @@ function ProfileDetailsEdit({ setIsEditing }) {
           <ImageSrc
             style={{
               backgroundImage: `url(${
-                prevImage || urlFor(userInfo.profilePic).url()
+                prevImage ||
+                (userInfo.profilePic && urlFor(userInfo.profilePic).url())
               })`,
             }}
           />

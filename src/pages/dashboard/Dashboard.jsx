@@ -12,7 +12,7 @@ import {
 
 import { Line, getElementsAtEvent } from "react-chartjs-2";
 
-import { dataForChart } from "../../utils";
+import { dataForChart } from "../../utils/functions";
 import { dateWiseInvestmentTrans, dateWiseSaleTrans } from "../../data/dummy";
 
 import { Box } from "@mui/material";
