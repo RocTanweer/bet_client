@@ -41,8 +41,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
   const formik = useFormik({
     initialValues: {
       profilePic: userInfo.profilePic,
-      firstName: userInfo.firstName,
-      lastName: userInfo.lastName,
+      name: userInfo.name,
       email: userInfo.email,
       password: userInfo.password,
     },
@@ -51,17 +50,18 @@ function ProfileDetailsEdit({ setIsEditing }) {
       try {
         const mutatedFields = filterKeyValuePair(values, userInfo);
 
-        const dataForUpdation = {
-          mutatedObj: mutatedFields,
-          prevProfilePicId:
-            mutatedFields.profilePic && userInfo.profilePic?.asset._ref,
-        };
-
         if (Object.keys(mutatedFields).length !== 0) {
+          const dataForUpdation = {
+            mutatedObj: mutatedFields,
+            prevProfilePicId:
+              mutatedFields.profilePic && userInfo.profilePic?.asset._ref,
+          };
+
           await updateUserDetails(loginToken, dataForUpdation, dispatch);
         }
         setIsEditing(false);
       } catch (error) {
+        /// Handle Error Feedback \\\
         console.log(error);
       }
     },
@@ -128,47 +128,21 @@ function ProfileDetailsEdit({ setIsEditing }) {
         <Typography color={"text.secondary"}>Change Profile Pic</Typography>
       </FlexBox>
 
-      <FlexBox csx={{ gap: 1 }}>
-        <Box sx={{ flex: 1 }}>
-          <TextField
-            label={"First Name"}
-            type={"text"}
-            name={"firstName"}
-            id={"firstName"}
-            fullWidth
-            defaultValue={formik.values.firstName}
-            onChange={formik.handleChange}
-            error={formik.errors.firstName && formik.touched.firstName}
-          />
-          <FormHelperText
-            error={formik.errors.firstName && formik.touched.firstName}
-          >
-            {formik.errors.firstName &&
-              formik.touched.firstName &&
-              formik.errors.firstName}
-          </FormHelperText>
-        </Box>
-
-        <Box sx={{ flex: 1 }}>
-          <TextField
-            label={"Last Name"}
-            type={"text"}
-            name={"lastName"}
-            id={"lastName"}
-            fullWidth
-            defaultValue={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.errors.lastName && formik.touched.lastName}
-          />
-          <FormHelperText
-            error={formik.errors.lastName && formik.touched.lastName}
-          >
-            {formik.errors.lastName &&
-              formik.touched.lastName &&
-              formik.errors.lastName}
-          </FormHelperText>
-        </Box>
-      </FlexBox>
+      <Box sx={{ flex: 1 }}>
+        <TextField
+          label={"Name"}
+          type={"text"}
+          name={"name"}
+          id={"name"}
+          fullWidth
+          defaultValue={formik.values.name}
+          onChange={formik.handleChange}
+          error={formik.errors.name && formik.touched.name}
+        />
+        <FormHelperText error={formik.errors.name && formik.touched.name}>
+          {formik.errors.name && formik.touched.name && formik.errors.name}
+        </FormHelperText>
+      </Box>
 
       <Box>
         <TextField
