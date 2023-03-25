@@ -11,14 +11,14 @@ export async function register(userDoc, dispatch) {
   try {
     dispatch({ type: AT.USER_REGISTER_REQUEST });
 
-    const query = `*[_type == "user" && email=="${userDoc.email}"]`;
+    const query = `*[_type == "business" && email=="${userDoc.email}"]`;
 
     const existingUser = await client.fetch(query);
 
     if (existingUser.length === 0) {
       delete userDoc.isAgreed;
       const sanityUserDoc = {
-        _type: "user",
+        _type: "business",
         ...userDoc,
         password: encryptString(userDoc.password),
         loginType: "manual",
@@ -67,7 +67,7 @@ export async function login(userCred, dispatch) {
   try {
     dispatch({ type: AT.USER_LOGIN_REQUEST });
 
-    const query = `*[_type == "user" && email=="${userCred.email}"]`;
+    const query = `*[_type == "business" && email=="${userCred.email}"]`;
 
     const existingUser = await client.fetch(query);
 
@@ -129,7 +129,7 @@ export async function oAuthLogin(accessToken, dispatch) {
       config
     );
 
-    const query = `*[_type == "user" && email=="${userInfo.email}"]`;
+    const query = `*[_type == "business" && email=="${userInfo.email}"]`;
 
     const existingUser = await client.fetch(query);
 
@@ -192,13 +192,12 @@ export async function getUserDetails(loginToken, dispatch) {
   try {
     dispatch({ type: AT.USER_DETAILS_REQUEST });
 
-    const query = `*[_type == "user" && _id=="${loginToken}"]`;
+    const query = `*[_type == "business" && _id=="${loginToken}"]`;
 
     const response = await client.fetch(query);
 
     dispatch({ type: AT.USER_DETAILS_SUCCESS, payload: { info: response[0] } });
   } catch (error) {
-    console.log(error);
     dispatch({ type: AT.USER_DETAILS_FAIL });
     throw error;
   }
