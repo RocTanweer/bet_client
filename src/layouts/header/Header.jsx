@@ -114,7 +114,8 @@ function Header() {
                 <Avatar
                   alt="user image"
                   src={
-                    userLoading || !userInfo.profilePic
+                    userLoading ||
+                    (!userInfo.profilePic && !userInfo.profilePicURL)
                       ? null
                       : userInfo.profilePicURL?.replace("96", "200") ||
                         urlFor(userInfo.profilePic).url()
