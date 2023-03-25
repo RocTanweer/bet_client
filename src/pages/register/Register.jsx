@@ -36,8 +36,7 @@ function Register() {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      name: "",
       email: "",
       password: "",
       isAgreed: false,
@@ -64,45 +63,22 @@ function Register() {
           </Box>
 
           <Stack component={"form"} spacing={2} onSubmit={formik.handleSubmit}>
-            <FlexBox csx={{ gap: 1 }}>
-              <Box sx={{ flex: 1 }}>
-                <TextField
-                  label={"First Name"}
-                  type={"text"}
-                  name={"firstName"}
-                  id={"firstName"}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  error={formik.errors.firstName && formik.touched.firstName}
-                />
-                <FormHelperText
-                  error={formik.errors.firstName && formik.touched.firstName}
-                >
-                  {formik.errors.firstName &&
-                    formik.touched.firstName &&
-                    formik.errors.firstName}
-                </FormHelperText>
-              </Box>
-
-              <Box sx={{ flex: 1 }}>
-                <TextField
-                  label={"Last Name"}
-                  type={"text"}
-                  name={"lastName"}
-                  id={"lastName"}
-                  fullWidth
-                  onChange={formik.handleChange}
-                  error={formik.errors.lastName && formik.touched.lastName}
-                />
-                <FormHelperText
-                  error={formik.errors.lastName && formik.touched.lastName}
-                >
-                  {formik.errors.lastName &&
-                    formik.touched.lastName &&
-                    formik.errors.lastName}
-                </FormHelperText>
-              </Box>
-            </FlexBox>
+            <Box sx={{ flex: 1 }}>
+              <TextField
+                label={"Name"}
+                type={"text"}
+                name={"name"}
+                id={"name"}
+                fullWidth
+                onChange={formik.handleChange}
+                error={formik.errors.name && formik.touched.name}
+              />
+              <FormHelperText error={formik.errors.name && formik.touched.name}>
+                {formik.errors.name &&
+                  formik.touched.name &&
+                  formik.errors.name}
+              </FormHelperText>
+            </Box>
 
             <Box>
               <TextField
@@ -204,8 +180,8 @@ function Register() {
                     Terms and Conditions
                   </Typography>
                   <Typography mb={1}>
-                    In the incident of forgetting the password, the user account
-                    will not be recovered. In other words, the{" "}
+                    In the incident of forgetting the password, the business
+                    account will not be recovered. In other words, the{" "}
                     <b>forgot password</b> feature is not implemented
                   </Typography>
                   <Typography>
