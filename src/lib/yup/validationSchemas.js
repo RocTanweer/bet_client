@@ -47,8 +47,7 @@ export const loginFormValSch = Yup.object({
 });
 
 export const registerFormValSch = Yup.object({
-  firstName: Yup.string().required("First Name is required").min(3).max(15),
-  lastName: Yup.string().required("Last Name is required").min(3).max(15),
+  name: Yup.string().required("Name is required").min(3).max(15),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string().required("Password is required"),
   isAgreed: Yup.boolean().oneOf([true], "Please agree before continuing"),
@@ -56,8 +55,7 @@ export const registerFormValSch = Yup.object({
 
 export const profileDetailsEditFormValSch = Yup.object({
   profilePic: Yup.mixed().notRequired(),
-  firstName: Yup.string().required("First Name is required").min(3).max(15),
-  lastName: Yup.string().required("Last Name is required").min(3).max(15),
+  name: Yup.string().required("Name is required").min(3).max(15),
   email: Yup.string().email("Invalid email").required("Email is required"),
   password: Yup.string(),
 });
