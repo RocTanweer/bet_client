@@ -46,7 +46,7 @@ function ProfileDetails({ setIsEditing }) {
             <Avatar
               alt="user Image"
               src={
-                !userInfo.profilePic
+                !userInfo.profilePic && !userInfo.profilePicURL
                   ? null
                   : userInfo?.profilePicURL?.replace("96", "200") ||
                     urlFor(userInfo.profilePic).url()
@@ -79,9 +79,7 @@ function ProfileDetails({ setIsEditing }) {
               Your name
             </Typography>
 
-            <Typography variant="h6">
-              {userInfo.firstName} {userInfo.lastName}
-            </Typography>
+            <Typography variant="h6">{userInfo.name}</Typography>
           </Box>
 
           <Box sx={{ width: "100%" }}>
