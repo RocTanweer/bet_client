@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 
 import { FlexBox } from "../../../layouts/flexBox";
-import { investmentItems } from "../../../data/dummy";
+import { expenseItems } from "../../../data/dummy";
 
 function Item() {
   return (
@@ -26,7 +26,7 @@ function Item() {
         {/* Header */}
         <Box mb={3}>
           <Typography variant="h5" textAlign={"center"}>
-            Investment Items
+            Expense Items
           </Typography>
         </Box>
         {/* Search Field */}
@@ -42,10 +42,10 @@ function Item() {
         />
         {/* Body */}
         <List sx={{ width: "100%", height: "500px", overflowY: "auto" }}>
-          {investmentItems.map((investmentItem) => (
-            <ListItem key={investmentItem.name} disablePadding>
+          {expenseItems.map((expenseItem) => (
+            <ListItem key={expenseItem.name} disablePadding>
               <ListItemButton>
-                <ListItemText primary={investmentItem.name} />
+                <ListItemText primary={expenseItem.name} />
               </ListItemButton>
             </ListItem>
           ))}

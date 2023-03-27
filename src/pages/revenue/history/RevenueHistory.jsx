@@ -1,19 +1,22 @@
 import { Box, Button, Typography } from "@mui/material";
 
 import { DateChooser } from "../../../components/dateChooser";
-import { dateWiseInvestmentTrans } from "../../../data/dummy";
-import FlexBox from "../../../layouts/flexBox/FlexBox";
-import MyTable from "../../../components/myTable/MyTable";
+
+import { dateWiseRevenueTrans } from "../../../data/dummy";
+
+import { MyTable } from "../../../components/myTable";
+import { FlexBox } from "../../../layouts/flexBox";
+
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import { saleFormValSch } from "../../../lib/yup";
+import { historyFormValSch } from "../../../lib/yup/validationSchemas";
 
-function InvestmentHistory() {
+function RevenueHistory() {
   const formik = useFormik({
     initialValues: {
       date: null,
     },
-    validationSchema: saleFormValSch,
+    validationSchema: historyFormValSch,
     onSubmit: (values) => console.log(values),
   });
 
@@ -24,11 +27,10 @@ function InvestmentHistory() {
   }
 
   function handleInfinitePagination(newPage, rowsPerPage) {
-    console.log(dateWiseInvestmentTrans.length / rowsPerPage > newPage);
+    console.log(dateWiseRevenueTrans.length / rowsPerPage > newPage);
   }
 
   return (
-    // Page Component
     <FlexBox
       csx={{
         gridColumn: { xs: "1 / 2", md: "2 / 3" },
@@ -55,13 +57,12 @@ function InvestmentHistory() {
         >
           <Box>
             <Typography variant="h4" component={"h1"}>
-              Investment history
+              Revenue history
             </Typography>
             <Typography variant="subtitle2">
-              Last {dateWiseInvestmentTrans.length} days
+              Last {dateWiseRevenueTrans.length} days
             </Typography>
           </Box>
-
           <Box component={"form"} onSubmit={formik.handleSubmit}>
             <DateChooser
               label={"Search by date"}
@@ -71,14 +72,15 @@ function InvestmentHistory() {
               size={"small"}
             />
 
-            <Button variant="contained" type="submit">
+            <Button type="submit" variant="contained">
               Search
             </Button>
           </Box>
         </FlexBox>
+        {/* Table */}
         <MyTable
           headData={["Data", "Amount (INR)"]}
-          rowsData={dateWiseInvestmentTrans}
+          rowsData={dateWiseRevenueTrans}
           handleRowClick={handleRowClick}
           handleInfinitePagination={handleInfinitePagination}
         />
@@ -87,4 +89,4 @@ function InvestmentHistory() {
   );
 }
 
-export default InvestmentHistory;
+export default RevenueHistory;

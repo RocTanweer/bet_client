@@ -20,18 +20,18 @@ import { useFormik } from "formik";
 
 import { FlexBox } from "../../../layouts/flexBox";
 
-import { investmentFormValSch } from "../../../lib/yup";
+import { expenseFormValSch } from "../../../lib/yup";
 
 function Add() {
   const formik = useFormik({
     initialValues: {
-      investmentItem: "",
+      expenseItem: "",
       amount: "",
       payment: "",
       date: null,
       receiptImg: null,
     },
-    validationSchema: investmentFormValSch,
+    validationSchema: expenseFormValSch,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -55,40 +55,37 @@ function Add() {
       >
         {/* Header */}
         <Box sx={{ mb: 3 }}>
-          <Typography variant="h5">Add Investment</Typography>
+          <Typography variant="h5">Add Expense</Typography>
         </Box>
         {/* Body */}
         <Box>
           <Stack gap={3} component={"form"} onSubmit={formik.handleSubmit}>
             <Box>
               <Autocomplete
-                name="investmentItem"
+                name="expenseItem"
                 freeSolo
                 options={["one", "two", "three"]}
                 onChange={(e, value) => {
-                  formik.setFieldValue("investmentItem", value);
+                  formik.setFieldValue("expenseItem", value);
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label="Investment Item"
-                    id="investmentItem"
-                    name="investmentItem"
+                    label="Expense Item"
+                    id="expenseItem"
+                    name="expenseItem"
                     error={
-                      formik.errors.investmentItem &&
-                      formik.touched.investmentItem
+                      formik.errors.expenseItem && formik.touched.expenseItem
                     }
                   />
                 )}
               />
               <FormHelperText
-                error={
-                  formik.errors.investmentItem && formik.touched.investmentItem
-                }
+                error={formik.errors.expenseItem && formik.touched.expenseItem}
               >
-                {formik.errors.investmentItem &&
-                  formik.touched.investmentItem &&
-                  formik.errors.investmentItem}
+                {formik.errors.expenseItem &&
+                  formik.touched.expenseItem &&
+                  formik.errors.expenseItem}
               </FormHelperText>
             </Box>
 

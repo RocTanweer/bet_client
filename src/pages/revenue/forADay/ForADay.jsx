@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 import { useParams } from "react-router-dom";
 
-import { saleTransForADay } from "../../../data/dummy";
+import { revenueTransForADay } from "../../../data/dummy";
 import { FlexBox } from "../../../layouts/flexBox";
 
 import MyTable from "../../../components/myTable/MyTable";
@@ -53,7 +53,7 @@ function ForADay() {
         {/* BOdy */}
         <MyTable
           headData={["ID", "Item", "Unit", "Amount (INR)"]}
-          rowsData={saleTransForADay.trans}
+          rowsData={revenueTransForADay.trans}
         />
       </Box>
     </FlexBox>

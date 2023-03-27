@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 import { FlexBox } from "../../../layouts/flexBox";
 
-import { saleProducts } from "../../../data/dummy";
+import { revenueProducts } from "../../../data/dummy";
 import { MyTable } from "../../../components/myTable";
 
 function Products() {
@@ -24,13 +24,13 @@ function Products() {
         {/* Header */}
         <Box mb={3}>
           <Typography variant="h5" textAlign={"center"}>
-            Sale Products
+            Revenue Products
           </Typography>
         </Box>
         {/* Body */}
         <MyTable
           headData={["Name", "Price"]}
-          rowsData={saleProducts}
+          rowsData={revenueProducts}
           handleRowClick={handleRowClick}
         />
       </Box>

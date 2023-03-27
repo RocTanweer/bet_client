@@ -14,17 +14,17 @@ import { useFormik } from "formik";
 
 import { FlexBox } from "../../../layouts/flexBox";
 
-import { saleFormValSch } from "../../../lib/yup";
+import { revenueFormValSch } from "../../../lib/yup";
 
 function Add() {
   const formik = useFormik({
     initialValues: {
-      saleItem: "",
+      revenueItem: "",
       unit: "",
       amount: "",
       date: null,
     },
-    validationSchema: saleFormValSch,
+    validationSchema: revenueFormValSch,
     onSubmit: (values) => {
       console.log(values);
     },
@@ -48,36 +48,38 @@ function Add() {
       >
         {/* Header */}
         <Box sx={{ mb: 3 }}>
-          <Typography variant="h5">Add Sale</Typography>
+          <Typography variant="h5">Add Revenue</Typography>
         </Box>
         {/* Body */}
         <Box>
           <Stack gap={3} component={"form"} onSubmit={formik.handleSubmit}>
             <Box>
               <Autocomplete
-                name={"saleItem"}
+                name={"revenueItem"}
                 freeSolo
                 options={["one", "two", "three"]}
                 onChange={(e, value) => {
-                  formik.setFieldValue("saleItem", value);
+                  formik.setFieldValue("revenueItem", value);
                 }}
                 renderInput={(params) => (
                   <TextField
                     {...params}
-                    label={"Sale Item"}
-                    id={"saleItem"}
-                    name={"saleItem"}
-                    error={formik.errors.saleItem && formik.touched.saleItem}
+                    label={"Revenue Item"}
+                    id={"revenueItem"}
+                    name={"revenueItem"}
+                    error={
+                      formik.errors.revenueItem && formik.touched.revenueItem
+                    }
                   />
                 )}
               />
               <FormHelperText
-                error={formik.errors.saleItem && formik.touched.saleItem}
+                error={formik.errors.revenueItem && formik.touched.revenueItem}
               >
                 {" "}
-                {formik.errors.saleItem &&
-                  formik.touched.saleItem &&
-                  formik.errors.saleItem}
+                {formik.errors.revenueItem &&
+                  formik.touched.revenueItem &&
+                  formik.errors.revenueItem}
               </FormHelperText>
             </Box>
 
