@@ -5,14 +5,14 @@ import { Login } from "../../pages/login";
 import { Register } from "../../pages/register";
 import { Profile } from "../../pages/profile";
 import { Dashboard } from "../../pages/dashboard";
-import { InvestmentHistory } from "../../pages/investment/history";
-import { SaleHistory } from "../../pages/sale/history";
-import { ForADay as InvForADay } from "../../pages/investment/forADay";
-import { ForADay as SalForADay } from "../../pages/sale/forADay";
-import { Add as AddInvestment } from "../../pages/investment/add/";
-import { Add as AddSale } from "../../pages/sale/add";
-import { Item as InvestmentItem } from "../../pages/investment/items";
-import { Products as SaleProducts } from "../../pages/sale/products";
+import { ExpenseHistory } from "../../pages/expense/history";
+import { RevenueHistory } from "../../pages/revenue/history";
+import { ForADay as ExpForADay } from "../../pages/expense/forADay";
+import { ForADay as SalForADay } from "../../pages/revenue/forADay";
+import { Add as AddExpense } from "../../pages/expense/add/";
+import { Add as AddRevenue } from "../../pages/revenue/add";
+import { Item as ExpenseItem } from "../../pages/expense/items";
+import { Products as RevenueProducts } from "../../pages/revenue/products";
 
 const router = createBrowserRouter([
   {
@@ -29,36 +29,36 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
-        path: "/investment/items",
-        element: <InvestmentItem />,
+        path: "/expense/items",
+        element: <ExpenseItem />,
       },
       {
-        path: "investment/history",
-        element: <InvestmentHistory />,
+        path: "expense/history",
+        element: <ExpenseHistory />,
       },
       {
-        path: "investment/history/:date",
-        element: <InvForADay />,
+        path: "expense/history/:date",
+        element: <ExpForADay />,
       },
       {
-        path: "investment/add",
-        element: <AddInvestment />,
+        path: "expense/add",
+        element: <AddExpense />,
       },
       {
-        path: "sale/products",
-        element: <SaleProducts />,
+        path: "revenue/products",
+        element: <RevenueProducts />,
       },
       {
-        path: "sale/history",
-        element: <SaleHistory />,
+        path: "revenue/history",
+        element: <RevenueHistory />,
       },
       {
-        path: "sale/history/:date",
+        path: "revenue/history/:date",
         element: <SalForADay />,
       },
       {
-        path: "sale/add",
-        element: <AddSale />,
+        path: "revenue/add",
+        element: <AddRevenue />,
       },
     ],
   },

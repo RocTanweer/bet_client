@@ -13,7 +13,7 @@ import {
 import { Line, getElementsAtEvent } from "react-chartjs-2";
 
 import { dataForChart } from "../../utils/functions";
-import { dateWiseInvestmentTrans, dateWiseSaleTrans } from "../../data/dummy";
+import { dateWiseExpenseTrans, dateWiseRevenueTrans } from "../../data/dummy";
 
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -32,8 +32,8 @@ function Dashboard() {
 
   // Assuming passed arguments are same as fetched data
   const { labels, options, datasets } = dataForChart(
-    dateWiseInvestmentTrans,
-    dateWiseSaleTrans
+    dateWiseExpenseTrans,
+    dateWiseRevenueTrans
   );
 
   // Making data for the chart

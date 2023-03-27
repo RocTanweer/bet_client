@@ -1,4 +1,4 @@
-export const dateWiseInvestmentTrans = [
+export const dateWiseExpenseTrans = [
   {
     date: "2023-01-31",
     amount: 4650,
@@ -41,7 +41,7 @@ export const dateWiseInvestmentTrans = [
   },
 ];
 
-export const dateWiseSaleTrans = [
+export const dateWiseRevenueTrans = [
   {
     date: "2023-01-31",
     amount: 5046,
@@ -84,7 +84,7 @@ export const dateWiseSaleTrans = [
   },
 ];
 
-export const investmentTransForADay = {
+export const expenseTransForADay = {
   date: "2023-01-22",
   trans: [
     {
@@ -131,7 +131,7 @@ export const investmentTransForADay = {
 };
 
 // probably in a modal
-export const detailOfAInvestmentTrans = {
+export const detailsOfAnExpenseTran = {
   id: "#4d6877d",
   item: "spices",
   amount: "120",
@@ -139,7 +139,7 @@ export const detailOfAInvestmentTrans = {
   receipt: "some image of bill",
 };
 
-export const saleTransForADay = {
+export const revenueTransForADay = {
   date: "2023-01-28",
   trans: [
     {
@@ -175,7 +175,7 @@ export const saleTransForADay = {
   ],
 };
 
-export const investmentItems = [
+export const expenseItems = [
   {
     name: "bottle",
   },
@@ -217,7 +217,7 @@ export const investmentItems = [
   },
 ];
 
-export const saleProducts = [
+export const revenueProducts = [
   {
     name: "Saahan Only Chicken",
     price: 139,

@@ -1,2 +1,2 @@
-export { investmentFormValSch } from "./validationSchemas";
-export { saleFormValSch } from "./validationSchemas";
+export { expenseFormValSch } from "./validationSchemas";
+export { revenueFormValSch } from "./validationSchemas";

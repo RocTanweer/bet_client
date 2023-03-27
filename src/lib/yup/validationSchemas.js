@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 
-export const investmentFormValSch = Yup.object({
-  investmentItem: Yup.string("Choose an investment item").required(
+export const expenseFormValSch = Yup.object({
+  expenseItem: Yup.string("Choose an expense item").required(
     "This is required!"
   ),
   amount: Yup.number("Enter amount invested").required("This is required"),
@@ -24,10 +24,10 @@ export const investmentFormValSch = Yup.object({
     .notRequired(),
 });
 
-export const saleFormValSch = Yup.object({
-  saleItem: Yup.string("Choose a sale item").required("This is required"),
+export const revenueFormValSch = Yup.object({
+  revenueItem: Yup.string("Choose a revenue item").required("This is required"),
   unit: Yup.number("Enter number of units sold").required("This is required"),
-  amount: Yup.number("Enter sale amount").required("This is required"),
+  amount: Yup.number("Enter revenue amount").required("This is required"),
   date: Yup.date()
     .nullable()
     .typeError("date is required")

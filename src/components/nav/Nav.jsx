@@ -21,8 +21,8 @@ import { NavLink } from "react-router-dom";
 
 function Nav() {
   const [isSubNavOpen, setIsSubNavOpen] = useState({
-    trans: false,
-    sales: false,
+    expense: false,
+    revenue: false,
   });
 
   function handleSubNav(name) {
@@ -38,21 +38,21 @@ function Nav() {
         <ListItemText primary="Dashboard" />
       </ListItemButton>
 
-      <ListItemButton onClick={() => handleSubNav("trans")}>
+      <ListItemButton onClick={() => handleSubNav("expense")}>
         <ListItemIcon>
           <PaidIcon />
         </ListItemIcon>
-        <ListItemText primary="Investment" />
+        <ListItemText primary="Expense" />
 
-        {isSubNavOpen.trans ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {isSubNavOpen.expense ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
 
-      <Collapse in={isSubNavOpen.trans} timeout="auto" unmountOnExit>
+      <Collapse in={isSubNavOpen.expense} timeout="auto" unmountOnExit>
         <List component={"div"} disablePadding>
           <ListItemButton
             sx={{ pl: 4 }}
             component={NavLink}
-            to={"/investment/items"}
+            to={"/expense/items"}
           >
             <ListItemIcon>
               <ListAltIcon />
@@ -63,7 +63,7 @@ function Nav() {
           <ListItemButton
             sx={{ pl: 4 }}
             component={NavLink}
-            to={"/investment/history"}
+            to={"/expense/history"}
           >
             <ListItemIcon>
               <HistoryIcon />
@@ -73,7 +73,7 @@ function Nav() {
 
           <ListItemButton
             component={NavLink}
-            to={"/investment/add"}
+            to={"/expense/add"}
             sx={{ pl: 4 }}
             onClick={() => null}
           >
@@ -85,21 +85,21 @@ function Nav() {
         </List>
       </Collapse>
 
-      <ListItemButton onClick={() => handleSubNav("sales")}>
+      <ListItemButton onClick={() => handleSubNav("revenue")}>
         <ListItemIcon>
           <ReceiptIcon />
         </ListItemIcon>
-        <ListItemText primary="Sale" />
+        <ListItemText primary="Revenue" />
 
-        {isSubNavOpen.sales ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+        {isSubNavOpen.revenue ? <ExpandLessIcon /> : <ExpandMoreIcon />}
       </ListItemButton>
 
-      <Collapse in={isSubNavOpen.sales} timeout="auto" unmountOnExit>
+      <Collapse in={isSubNavOpen.revenue} timeout="auto" unmountOnExit>
         <List component={"div"} disablePadding>
           <ListItemButton
             sx={{ pl: 4 }}
             component={NavLink}
-            to={"/sale/products"}
+            to={"/revenue/products"}
           >
             <ListItemIcon>
               <ListAltIcon />
@@ -110,7 +110,7 @@ function Nav() {
           <ListItemButton
             sx={{ pl: 4 }}
             component={NavLink}
-            to={"/sale/history"}
+            to={"/revenue/history"}
           >
             <ListItemIcon>
               <HistoryIcon />
@@ -118,7 +118,11 @@ function Nav() {
             <ListItemText primary="History" />
           </ListItemButton>
 
-          <ListItemButton sx={{ pl: 4 }} component={NavLink} to={"/sale/add"}>
+          <ListItemButton
+            sx={{ pl: 4 }}
+            component={NavLink}
+            to={"/revenue/add"}
+          >
             <ListItemIcon>
               <AddCircleIcon />
             </ListItemIcon>

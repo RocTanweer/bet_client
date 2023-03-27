@@ -5,14 +5,14 @@ import Resizer from "react-image-file-resizer";
 
 /**
  * @description This takes two array of objects, which are dummy data for now, and returns data for the chart
- * @param {object[]} dateWiseInvestmentTrans
- * @param {object[]} dateWiseSaleTrans
+ * @param {object[]} dateWiseExpenseTrans
+ * @param {object[]} dateWiseRevenueTrans
  * @returns {object}
  */
-export function dataForChart(dateWiseInvestmentTrans, dateWiseSaleTrans) {
-  const labels = dateWiseInvestmentTrans.map((trans) => trans.date);
-  const data1 = dateWiseInvestmentTrans.map((trans) => trans.amount);
-  const data2 = dateWiseSaleTrans.map((trans) => trans.amount);
+export function dataForChart(dateWiseExpenseTrans, dateWiseRevenueTrans) {
+  const labels = dateWiseExpenseTrans.map((trans) => trans.date);
+  const data1 = dateWiseExpenseTrans.map((trans) => trans.amount);
+  const data2 = dateWiseRevenueTrans.map((trans) => trans.amount);
   const options = {};
 
   return {
@@ -20,20 +20,20 @@ export function dataForChart(dateWiseInvestmentTrans, dateWiseSaleTrans) {
     options,
     datasets: [
       {
-        label: "Investment Transactions",
+        label: "Expense",
         data: data1,
         borderColor: purple[300],
         backgroundColor: purple[300],
         tension: 0.1,
-        links: labels.map((date) => `/investment/history/${date}`),
+        links: labels.map((date) => `/expense/history/${date}`),
       },
       {
-        label: "Sales",
+        label: "Revenue",
         data: data2,
         borderColor: cyan[300],
         backgroundColor: cyan[300],
         tension: 0.1,
-        links: labels.map((date) => `/sale/history/${date}`),
+        links: labels.map((date) => `/revenue/history/${date}`),
       },
     ],
   };
