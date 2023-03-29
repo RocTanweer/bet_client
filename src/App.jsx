@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useGlobalState } from "./context/globalState";
+import { useGlobalState } from "./context/GlobalStateProvider.jsx";
 
-import { Header } from "./layouts/header";
-import { Sidebar } from "./layouts/sidebar";
+import { Header } from "./layouts";
+import { Sidebar } from "./layouts";
 
 function App() {
   const location = useLocation();

@@ -2,7 +2,7 @@ import * as AT from "../actionTypes/userActionTypes";
 
 import axios from "axios";
 
-import { client } from "../../lib/sanityClient";
+import { client } from "../../lib/sanityClient.js";
 
 import { formatUserInfo } from "../../utils/functions";
 import { decryptString, encryptString, sleep } from "../../utils/functions";

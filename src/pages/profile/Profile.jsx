@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import { ProfileDetails } from "../../layouts/profileDetails";
-import { ProfileDetailsEdit } from "../../layouts/profileDetailsEdit";
-import { FlexBox } from "../../layouts/flexBox";
+import { ProfileDetails } from "../../layouts";
+import { ProfileDetailsEdit } from "../../layouts";
+import { FlexBox } from "../../layouts";
 
 function Profile() {
   const [isEditing, setIsEditing] = useState(false);

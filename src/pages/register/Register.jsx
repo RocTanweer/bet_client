@@ -13,15 +13,15 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import { FlexBox } from "../../layouts/flexBox";
+import { FlexBox } from "../../layouts";
 import { Navigate, NavLink } from "react-router-dom";
 
-import { useGlobalState } from "../../context/globalState";
+import { useGlobalState } from "../../context/GlobalStateProvider";
 
 import { useFormik } from "formik";
-import { registerFormValSch } from "../../lib/yup/validationSchemas";
+import { registerFormValSch } from "../../lib/yupValidationSchemas";
 
-import GoogleOAuthBtn from "../../components/googleOAuthBtn/GoogleOAuthBtn";
+import { GoogleOAuthBtn } from "../../components";
 import { register } from "../../state/actions/userActions";
 import { useState } from "react";
 

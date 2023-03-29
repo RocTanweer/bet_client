@@ -1,6 +1,6 @@
-import { GlobalStateProvider } from "./globalState";
-import { MyRouterProvider } from "./reactRouterDom";
-import { OAuthProvider } from "./googleOAuth";
+import GlobalStateProvider from "./GlobalStateProvider.jsx";
+import MyRouterProvider from "./MyRouterProvider.jsx";
+import OAuthProvider from "./OAuthProvider.jsx";
 
 function GlobalContextProvider() {
   return (

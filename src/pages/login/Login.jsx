@@ -9,13 +9,13 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import { FlexBox } from "../../layouts/flexBox";
+import { FlexBox } from "../../layouts";
 import { Navigate, NavLink, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { loginFormValSch } from "../../lib/yup/validationSchemas";
-import { useGlobalState } from "../../context/globalState";
-import GoogleOAuthBtn from "../../components/googleOAuthBtn/GoogleOAuthBtn";
+import { loginFormValSch } from "../../lib/yupValidationSchemas";
+import { useGlobalState } from "../../context/GlobalStateProvider.jsx";
+import { GoogleOAuthBtn } from "../../components";
 
 import { login } from "../../state/actions/userActions";
 
