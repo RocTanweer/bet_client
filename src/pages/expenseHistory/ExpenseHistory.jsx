@@ -1,19 +1,18 @@
-import { Box, Button, Typography } from "@mui/material";
-
-import { DateChooser } from "../../components";
-import { dateWiseExpenseTrans } from "../../data/dummy";
-import { FlexBox } from "../../layouts";
-import { MyTable } from "../../components";
 import { useNavigate } from "react-router-dom";
+import { Box, Button, Typography } from "@mui/material";
 import { useFormik } from "formik";
-import { revenueFormValSch } from "../../lib/yupValidationSchemas";
+
+import { DateChooser, MyTable } from "../../components";
+import { dateWiseExpenseTrans } from "../../data/dummy";
+import { historyFormValSch } from "../../lib/yupValidationSchemas.js";
+import { FlexBox } from "../../layouts";
 
 function ExpenseHistory() {
   const formik = useFormik({
     initialValues: {
       date: null,
     },
-    validationSchema: revenueFormValSch,
+    validationSchema: historyFormValSch,
     onSubmit: (values) => console.log(values),
   });
 

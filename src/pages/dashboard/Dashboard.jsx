@@ -1,5 +1,7 @@
 import { useRef } from "react";
-
+import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
+import { Line, getElementsAtEvent } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   LineElement,
@@ -10,13 +12,8 @@ import {
   Legend,
 } from "chart.js";
 
-import { Line, getElementsAtEvent } from "react-chartjs-2";
-
-import { dataForChart } from "../../utils/functions";
+import { dataForChart } from "./utils/dashboardFunctions.js";
 import { dateWiseExpenseTrans, dateWiseRevenueTrans } from "../../data/dummy";
-
-import { Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
 ChartJS.register(
   LineElement,

@@ -1,7 +1,6 @@
 import { useState } from "react";
 
-import { ProfileDetails } from "../../layouts";
-import { ProfileDetailsEdit } from "../../layouts";
+import { ProfileDetails, ProfileDetailsEdit } from "./layouts";
 import { FlexBox } from "../../layouts";
 
 function Profile() {

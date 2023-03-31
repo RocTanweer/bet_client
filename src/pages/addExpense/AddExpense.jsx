@@ -11,16 +11,12 @@ import {
   Button,
   FormHelperText,
 } from "@mui/material";
-
-import { DateChooser } from "../../components";
-
 import FileUploadIcon from "@mui/icons-material/FileUpload";
-
 import { useFormik } from "formik";
 
+import { DateChooser } from "../../components";
 import { FlexBox } from "../../layouts";
-
-import { expenseFormValSch } from "../../lib/yupValidationSchemas";
+import { expenseFormValSch } from "./lib/addExpenseYup.js";
 
 function AddExpense() {
   const formik = useFormik({

@@ -7,14 +7,11 @@ import {
   Typography,
   Button,
 } from "@mui/material";
-
-import { DateChooser } from "../../components";
-
 import { useFormik } from "formik";
 
+import { DateChooser } from "../../components";
 import { FlexBox } from "../../layouts";
-
-import { revenueFormValSch } from "../../lib/yupValidationSchemas";
+import { revenueFormValSch } from "./lib/addRevenueYup.js";
 
 function AddRevenue() {
   const formik = useFormik({

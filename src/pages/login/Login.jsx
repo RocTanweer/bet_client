@@ -1,23 +1,21 @@
 import {
   Box,
-  Stack,
-  Typography,
-  TextField,
   Button,
+  CircularProgress,
   Divider,
   FormHelperText,
-  CircularProgress,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
+import { useFormik } from "formik";
+import { Navigate, NavLink, useLocation } from "react-router-dom";
 
 import { FlexBox } from "../../layouts";
-import { Navigate, NavLink, useLocation } from "react-router-dom";
-import { useFormik } from "formik";
-
-import { loginFormValSch } from "../../lib/yupValidationSchemas";
-import { useGlobalState } from "../../context/GlobalStateProvider.jsx";
 import { GoogleOAuthBtn } from "../../components";
-
+import { useGlobalState } from "../../context/GlobalStateProvider.jsx";
 import { login } from "../../state/actions/businessActions";
+import { loginFormValSch } from "./lib/loginYup.js";
 
 function Login() {
   const { state, dispatch } = useGlobalState();

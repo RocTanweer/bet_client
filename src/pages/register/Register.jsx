@@ -1,29 +1,26 @@
+import { useState } from "react";
 import {
   Box,
-  Stack,
-  Typography,
-  TextField,
   Button,
-  Divider,
-  FormHelperText,
   Checkbox,
-  FormGroup,
-  FormControlLabel,
-  Modal,
   CircularProgress,
+  Divider,
+  FormControlLabel,
+  FormGroup,
+  FormHelperText,
+  Modal,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
-
-import { FlexBox } from "../../layouts";
-import { Navigate, NavLink } from "react-router-dom";
+import { useFormik } from "formik";
+import { NavLink, Navigate } from "react-router-dom";
 
 import { useGlobalState } from "../../context/GlobalStateProvider";
-
-import { useFormik } from "formik";
-import { registerFormValSch } from "../../lib/yupValidationSchemas";
-
+import { FlexBox } from "../../layouts";
+import { registerFormValSch } from "./lib/registerYup.js";
 import { GoogleOAuthBtn } from "../../components";
 import { register } from "../../state/actions/businessActions";
-import { useState } from "react";
 
 function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);
