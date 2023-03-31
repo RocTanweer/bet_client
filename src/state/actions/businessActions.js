@@ -242,11 +242,25 @@ export async function updateBusinessDetails(
       };
     }
 
+    if (mutatedObj.email) {
+      const query = `*[_type == "business" && email=="${mutatedObj.email}"]`;
+      const existingBusiness = await client.fetch(query);
+
+      if (existingBusiness[0]) {
+        throw new Error(null, {
+          cause: { field: "email", value: "Email already taken" },
+        });
+      }
+    }
+
     const data = await client.patch(loginToken).set(mutatedObj).commit();
 
     if (prevProfilePicId) await client.delete(prevProfilePicId);
 
-    dispatch({ type: AT.BUSINESS_DETAILS_SUCCESS, payload: { info: data } });
+    dispatch({
+      type: AT.BUSINESS_DETAILS_SUCCESS,
+      payload: { info: data },
+    });
     dispatch({ type: AT.BUSINESS_DETAILS_UPDATE_SUCCESS });
   } catch (error) {
     dispatch({ type: AT.BUSINESS_DETAILS_UPDATE_FAIL });

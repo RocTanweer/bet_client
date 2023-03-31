@@ -63,7 +63,7 @@ function ProfileDetailsEdit({ setIsEditing }) {
         }
         setIsEditing(false);
       } catch (error) {
-        /// Handle Error Feedback \\\
+        formik.setFieldError(error.cause?.field, error.cause?.value);
         console.log(error);
       }
     },
