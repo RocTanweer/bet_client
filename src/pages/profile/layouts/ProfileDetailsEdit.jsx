@@ -1,34 +1,34 @@
-import { useState } from "react";
 import { useFormik } from "formik";
+import { useState } from "react";
 
 import {
-  Stack,
-  Typography,
   Box,
-  TextField,
   Button,
-  FormHelperText,
   CircularProgress,
+  FormHelperText,
+  Stack,
+  TextField,
+  Typography,
 } from "@mui/material";
 
-import { FlexBox } from "../../../layouts";
+import { FlexBox } from "@/layouts";
 
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 import { profileDetailsEditFormValSch } from "../lib/profileYup.js";
 import { filterKeyValuePair } from "../utils/profileFunctions.js";
 
-import { updateBusinessDetails } from "../../../state/actions/businessActions.js";
-import { useGlobalState } from "../../../context/GlobalStateProvider.jsx";
-import { resizeFile } from "../../../utils/functions";
+import { useGlobalState } from "@/context/GlobalStateProvider.jsx";
+import { updateBusinessDetails } from "@/state/actions/businessActions.js";
+import { resizeFile } from "@/utils/functions";
 
+import { urlFor } from "@/lib/sanityClient.js";
 import {
+  Image,
+  ImageBackdrop,
   ImageButton,
   ImageSrc,
-  ImageBackdrop,
-  Image,
 } from "./profileDetailsEdit.styled";
-import { urlFor } from "../../../lib/sanityClient.js";
 
 function ProfileDetailsEdit({ setIsEditing }) {
   const [prevImage, setPrevImage] = useState("");

@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 
-import { DateChooser } from "../../components";
-import { FlexBox } from "../../layouts";
+import { DateChooser } from "@/components";
+import { FlexBox } from "@/layouts";
 import { revenueFormValSch } from "./lib/addRevenueYup.js";
 
 function AddRevenue() {

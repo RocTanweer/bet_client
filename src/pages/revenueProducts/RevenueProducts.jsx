@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 
-import { FlexBox } from "../../layouts";
-import { revenueProducts } from "../../data/dummy";
-import { MyTable } from "../../components";
+import { FlexBox } from "@/layouts";
+import { revenueProducts } from "@/data/dummy";
+import { MyTable } from "@/components";
 
 function RevenueProducts() {
   function handleRowClick(data) {

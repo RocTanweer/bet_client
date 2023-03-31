@@ -16,11 +16,11 @@ import {
 import { useFormik } from "formik";
 import { NavLink, Navigate } from "react-router-dom";
 
-import { useGlobalState } from "../../context/GlobalStateProvider";
-import { FlexBox } from "../../layouts";
+import { useGlobalState } from "@/context/GlobalStateProvider";
+import { FlexBox } from "@/layouts";
 import { registerFormValSch } from "./lib/registerYup.js";
-import { GoogleOAuthBtn } from "../../components";
-import { register } from "../../state/actions/businessActions";
+import { GoogleOAuthBtn } from "@/components";
+import { register } from "@/state/actions/businessActions";
 
 function Register() {
   const [isModalOpen, setIsModalOpen] = useState(false);

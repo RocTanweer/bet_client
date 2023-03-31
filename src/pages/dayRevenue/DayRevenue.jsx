@@ -2,9 +2,9 @@ import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
 
-import { revenueTransForADay } from "../../data/dummy";
-import { FlexBox } from "../../layouts";
-import { MyTable } from "../../components";
+import { revenueTransForADay } from "@/data/dummy";
+import { FlexBox } from "@/layouts";
+import { MyTable } from "@/components";
 
 function DayRevenue() {
   const { date } = useParams();

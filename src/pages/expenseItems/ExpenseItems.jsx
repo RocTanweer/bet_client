@@ -8,8 +8,8 @@ import {
   ListItem,
 } from "@mui/material";
 
-import { FlexBox } from "../../layouts";
-import { expenseItems } from "../../data/dummy";
+import { FlexBox } from "@/layouts";
+import { expenseItems } from "@/data/dummy";
 
 function ExpenseItems() {
   return (

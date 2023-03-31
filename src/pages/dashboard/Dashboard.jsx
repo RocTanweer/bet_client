@@ -1,19 +1,19 @@
-import { useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import { Line, getElementsAtEvent } from "react-chartjs-2";
 import {
-  Chart as ChartJS,
-  LineElement,
-  PointElement,
   CategoryScale,
-  LinearScale,
-  Tooltip,
+  Chart as ChartJS,
   Legend,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Tooltip,
 } from "chart.js";
+import { useRef } from "react";
+import { Line, getElementsAtEvent } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom";
 
+import { dateWiseExpenseTrans, dateWiseRevenueTrans } from "@/data/dummy";
 import { dataForChart } from "./utils/dashboardFunctions.js";
-import { dateWiseExpenseTrans, dateWiseRevenueTrans } from "../../data/dummy";
 
 ChartJS.register(
   LineElement,

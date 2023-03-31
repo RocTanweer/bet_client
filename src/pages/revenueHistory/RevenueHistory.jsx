@@ -2,11 +2,11 @@ import { Box, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 
-import { DateChooser } from "../../components";
-import { dateWiseRevenueTrans } from "../../data/dummy";
-import { MyTable } from "../../components";
-import { FlexBox } from "../../layouts";
-import { historyFormValSch } from "../../lib/yupValidationSchemas";
+import { DateChooser } from "@/components";
+import { dateWiseRevenueTrans } from "@/data/dummy";
+import { MyTable } from "@/components";
+import { FlexBox } from "@/layouts";
+import { historyFormValSch } from "@/lib/yupValidationSchemas";
 
 function RevenueHistory() {
   const formik = useFormik({

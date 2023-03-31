@@ -14,8 +14,8 @@ import {
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { useFormik } from "formik";
 
-import { DateChooser } from "../../components";
-import { FlexBox } from "../../layouts";
+import { DateChooser } from "@/components";
+import { FlexBox } from "@/layouts";
 import { expenseFormValSch } from "./lib/addExpenseYup.js";
 
 function AddExpense() {

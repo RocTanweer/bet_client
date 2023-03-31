@@ -1,11 +1,11 @@
-import { useEffect } from "react";
 import { Avatar, Box, Button, Typography } from "@mui/material";
+import { useEffect } from "react";
 
-import { FlexBox } from "../../../layouts";
+import { FlexBox } from "@/layouts";
 
-import { useGlobalState } from "../../../context/GlobalStateProvider";
-import { getBusinessDetails } from "../../../state/actions/businessActions.js";
-import { urlFor } from "../../../lib/sanityClient.js";
+import { useGlobalState } from "@/context/GlobalStateProvider";
+import { urlFor } from "@/lib/sanityClient.js";
+import { getBusinessDetails } from "@/state/actions/businessActions.js";
 
 function ProfileDetails({ setIsEditing }) {
   const { state, dispatch } = useGlobalState();

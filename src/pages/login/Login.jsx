@@ -11,10 +11,10 @@ import {
 import { useFormik } from "formik";
 import { Navigate, NavLink, useLocation } from "react-router-dom";
 
-import { FlexBox } from "../../layouts";
-import { GoogleOAuthBtn } from "../../components";
-import { useGlobalState } from "../../context/GlobalStateProvider.jsx";
-import { login } from "../../state/actions/businessActions";
+import { FlexBox } from "@/layouts";
+import { GoogleOAuthBtn } from "@/components";
+import { useGlobalState } from "@/context/GlobalStateProvider.jsx";
+import { login } from "@/state/actions/businessActions";
 import { loginFormValSch } from "./lib/loginYup.js";
 
 function Login() {

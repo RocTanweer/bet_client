@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
 import { Box, Typography } from "@mui/material";
 import dayjs from "dayjs";
+import { useParams } from "react-router-dom";
 
-import { FlexBox } from "../../layouts";
-import { MyTable } from "../../components";
-import { expenseTransForADay } from "../../data/dummy";
+import { MyTable } from "@/components";
+import { expenseTransForADay } from "@/data/dummy";
+import { FlexBox } from "@/layouts";
 
 function DayExpenses() {
   const { date } = useParams();
