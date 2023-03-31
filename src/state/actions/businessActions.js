@@ -1,27 +1,28 @@
+import { client } from "@/lib/sanityClient.js";
+import { decryptString, encryptString, sleep } from "@/utils/functions";
+
 import axios from "axios";
 
 import * as AT from "../actionTypes/businessActionTypes";
-import { client } from "../../lib/sanityClient.js";
-import { decryptString, encryptString, sleep } from "../../utils/functions";
 
 export async function register(businessDoc, dispatch) {
   try {
     dispatch({ type: AT.BUSINESS_REGISTER_REQUEST });
 
-    const query = `*[_type == "business" && email=="${businessDoc.email}"]`;
+    const query = `*[_type == "business" && email=="${businessDoc.email}"][0]`;
 
-    const existingbusiness = await client.fetch(query);
+    const existingBusiness = await client.fetch(query);
 
-    if (existingbusiness.length === 0) {
+    if (!existingBusiness) {
       delete businessDoc.isAgreed;
-      const sanitybusinessDoc = {
+      const newBusinessDoc = {
         _type: "business",
         ...businessDoc,
         password: encryptString(businessDoc.password),
         loginType: "manual",
       };
 
-      const response = await client.create(sanitybusinessDoc);
+      const response = await client.create(newBusinessDoc);
 
       dispatch({
         type: AT.BUSINESS_DETAILS_LOGIN_TOKEN,
@@ -36,10 +37,7 @@ export async function register(businessDoc, dispatch) {
       localStorage.setItem("loginToken", encryptString(response._id));
 
       dispatch({ type: AT.BUSINESS_REGISTER_SUCCESS });
-    } else if (
-      existingbusiness.length !== 0 &&
-      existingbusiness[0].loginType === "manual"
-    ) {
+    } else if (existingBusiness.loginType === "manual") {
       throw new Error(null, {
         cause: {
           field: "email",
@@ -67,18 +65,15 @@ export async function login(businessCred, dispatch) {
   try {
     dispatch({ type: AT.BUSINESS_LOGIN_REQUEST });
 
-    const query = `*[_type == "business" && email=="${businessCred.email}"]`;
+    const query = `*[_type == "business" && email=="${businessCred.email}"][0]`;
 
-    const existingbusiness = await client.fetch(query);
+    const existingBusiness = await client.fetch(query);
 
-    if (existingbusiness.length === 0) {
+    if (!existingBusiness) {
       throw new Error(null, {
         cause: { field: "email", value: "No business exists with this email" },
       });
-    } else if (
-      existingbusiness.length !== 0 &&
-      existingbusiness[0].loginType === "gOAuth"
-    ) {
+    } else if (existingBusiness.loginType === "gOAuth") {
       throw new Error(null, {
         cause: {
           field: "email",
@@ -87,25 +82,22 @@ export async function login(businessCred, dispatch) {
       });
     }
 
-    const existingbusinessDecryptedPassword = decryptString(
-      existingbusiness[0].password
+    const existingBusinessDecryptedPassword = decryptString(
+      existingBusiness.password
     );
 
-    if (existingbusinessDecryptedPassword === businessCred.password) {
+    if (existingBusinessDecryptedPassword === businessCred.password) {
       dispatch({
         type: AT.BUSINESS_DETAILS_LOGIN_TOKEN,
-        payload: { loginToken: existingbusiness[0]._id },
+        payload: { loginToken: existingBusiness._id },
       });
 
       dispatch({
         type: AT.BUSINESS_DETAILS_SUCCESS,
-        payload: { info: existingbusiness[0] },
+        payload: { info: existingBusiness },
       });
 
-      localStorage.setItem(
-        "loginToken",
-        encryptString(existingbusiness[0]._id)
-      );
+      localStorage.setItem("loginToken", encryptString(existingBusiness._id));
 
       dispatch({ type: AT.BUSINESS_LOGIN_SUCCESS });
     } else {
@@ -132,25 +124,22 @@ export async function oAuthLogin(accessToken, dispatch) {
       config
     );
 
-    const query = `*[_type == "business" && email=="${businessInfo.email}"]`;
+    const query = `*[_type == "business" && email=="${businessInfo.email}"][0]`;
 
     const existingBusiness = await client.fetch(query);
 
     let businessDetails;
-    if (existingBusiness.length === 0) {
-      const businessDoc = {
+    if (!existingBusiness) {
+      const newBusinessDoc = {
         _type: "business",
         name: `${businessInfo.given_name} ${businessInfo.family_name}`,
         email: businessInfo.email,
         profilePicURL: businessInfo.picture,
         loginType: "gOAuth",
       };
-      businessDetails = await client.create(businessDoc);
-    } else if (
-      existingBusiness.length !== 0 &&
-      existingBusiness[0].loginType === "gOAuth"
-    ) {
-      businessDetails = existingBusiness[0];
+      businessDetails = await client.create(newBusinessDoc);
+    } else if (existingBusiness.loginType === "gOAuth") {
+      businessDetails = existingBusiness;
     } else {
       throw new Error(
         "business exist with this email, please try logging in using login form"
@@ -203,13 +192,13 @@ export async function getBusinessDetails(loginToken, dispatch) {
   try {
     dispatch({ type: AT.BUSINESS_DETAILS_REQUEST });
 
-    const query = `*[_type == "business" && _id=="${loginToken}"]`;
+    const query = `*[_type == "business" && _id=="${loginToken}"][0]`;
 
     const response = await client.fetch(query);
 
     dispatch({
       type: AT.BUSINESS_DETAILS_SUCCESS,
-      payload: { info: response[0] },
+      payload: { info: response },
     });
   } catch (error) {
     dispatch({ type: AT.BUSINESS_DETAILS_FAIL });
@@ -243,10 +232,10 @@ export async function updateBusinessDetails(
     }
 
     if (mutatedObj.email) {
-      const query = `*[_type == "business" && email=="${mutatedObj.email}"]`;
+      const query = `*[_type == "business" && email=="${mutatedObj.email}"][0]`;
       const existingBusiness = await client.fetch(query);
 
-      if (existingBusiness[0]) {
+      if (existingBusiness) {
         throw new Error(null, {
           cause: { field: "email", value: "Email already taken" },
         });
