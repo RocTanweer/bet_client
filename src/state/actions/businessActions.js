@@ -1,10 +1,7 @@
-import * as AT from "../actionTypes/businessActionTypes";
-
 import axios from "axios";
 
+import * as AT from "../actionTypes/businessActionTypes";
 import { client } from "../../lib/sanityClient.js";
-
-import { formatBusinessInfo } from "../../utils/functions";
 import { decryptString, encryptString, sleep } from "../../utils/functions";
 
 export async function register(businessDoc, dispatch) {
@@ -140,9 +137,14 @@ export async function oAuthLogin(accessToken, dispatch) {
     const existingBusiness = await client.fetch(query);
 
     let businessDetails;
-
     if (existingBusiness.length === 0) {
-      const businessDoc = formatBusinessInfo(businessInfo);
+      const businessDoc = {
+        _type: "business",
+        name: `${businessInfo.given_name} ${businessInfo.family_name}`,
+        email: businessInfo.email,
+        profilePicURL: businessInfo.picture,
+        loginType: "gOAuth",
+      };
       businessDetails = await client.create(businessDoc);
     } else if (
       existingBusiness.length !== 0 &&
