@@ -15,7 +15,7 @@ import FlexBox from "./FlexBox.jsx";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 
 import { profileDetailsEditFormValSch } from "../lib/yupValidationSchemas.js";
-import { updateUserDetails } from "../state/actions/userActions";
+import { updateBusinessDetails } from "../state/actions/businessActions";
 import { useGlobalState } from "../context/GlobalStateProvider.jsx";
 import { resizeFile, filterKeyValuePair } from "../utils/functions";
 
@@ -34,30 +34,30 @@ function ProfileDetailsEdit({ setIsEditing }) {
   const { state, dispatch } = useGlobalState();
 
   const {
-    userDetails: { info: userInfo, loginToken },
-    userDetailsUpdate: { loading: updateLoading },
+    businessDetails: { info: businessInfo, loginToken },
+    businessDetailsUpdate: { loading: updateLoading },
   } = state;
 
   const formik = useFormik({
     initialValues: {
-      profilePic: userInfo.profilePic,
-      name: userInfo.name,
-      email: userInfo.email,
-      password: userInfo.password,
+      profilePic: businessInfo.profilePic,
+      name: businessInfo.name,
+      email: businessInfo.email,
+      password: businessInfo.password,
     },
     validationSchema: profileDetailsEditFormValSch,
     onSubmit: async (values) => {
       try {
-        const mutatedFields = filterKeyValuePair(values, userInfo);
+        const mutatedFields = filterKeyValuePair(values, businessInfo);
 
         if (Object.keys(mutatedFields).length !== 0) {
           const dataForUpdation = {
             mutatedObj: mutatedFields,
             prevProfilePicId:
-              mutatedFields.profilePic && userInfo.profilePic?.asset._ref,
+              mutatedFields.profilePic && businessInfo.profilePic?.asset._ref,
           };
 
-          await updateUserDetails(loginToken, dataForUpdation, dispatch);
+          await updateBusinessDetails(loginToken, dataForUpdation, dispatch);
         }
         setIsEditing(false);
       } catch (error) {
@@ -116,7 +116,8 @@ function ProfileDetailsEdit({ setIsEditing }) {
             style={{
               backgroundImage: `url(${
                 prevImage ||
-                (userInfo.profilePic && urlFor(userInfo.profilePic).url())
+                (businessInfo.profilePic &&
+                  urlFor(businessInfo.profilePic).url())
               })`,
             }}
           />

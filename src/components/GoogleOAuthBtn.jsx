@@ -2,7 +2,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 import { useGlobalState } from "../context/GlobalStateProvider.jsx";
 
-import { oAuthLogin } from "../state/actions/userActions";
+import { oAuthLogin } from "../state/actions/businessActions";
 
 import GoogleIcon from "@mui/icons-material/Google";
 
@@ -14,7 +14,7 @@ function GoogleOAuthBtn() {
   const { state, dispatch } = useGlobalState();
 
   const {
-    userLoginOAuth: { loading: oAuthLoading },
+    businessLoginOAuth: { loading: oAuthLoading },
   } = state;
 
   const googleLogin = useGoogleLogin({

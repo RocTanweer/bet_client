@@ -4,33 +4,37 @@ import FlexBox from "./FlexBox.jsx";
 
 import { useGlobalState } from "../context/GlobalStateProvider.jsx";
 import { useEffect } from "react";
-import { getUserDetails } from "../state/actions/userActions";
+import { getBusinessDetails } from "../state/actions/businessActions";
 import { urlFor } from "../lib/sanityClient.js";
 
 function ProfileDetails({ setIsEditing }) {
   const { state, dispatch } = useGlobalState();
 
   const {
-    userDetails: { loading: userLoading, info: userInfo, loginToken },
+    businessDetails: {
+      loading: businessLoading,
+      info: businessInfo,
+      loginToken,
+    },
   } = state;
 
   useEffect(() => {
     async function getDetails() {
       try {
-        await getUserDetails(loginToken, dispatch);
+        await getBusinessDetails(loginToken, dispatch);
       } catch (error) {
         console.log(error);
       }
     }
 
-    if (loginToken && !userInfo) {
+    if (loginToken && !businessInfo) {
       getDetails();
     }
   }, []);
 
   return (
     <>
-      {userLoading ? (
+      {businessLoading ? (
         "Loading..."
       ) : (
         <FlexBox
@@ -44,12 +48,12 @@ function ProfileDetails({ setIsEditing }) {
         >
           <Box sx={{ width: "100%" }}>
             <Avatar
-              alt="user Image"
+              alt="business Image"
               src={
-                !userInfo.profilePic && !userInfo.profilePicURL
+                !businessInfo.profilePic && !businessInfo.profilePicURL
                   ? null
-                  : userInfo?.profilePicURL?.replace("96", "200") ||
-                    urlFor(userInfo.profilePic).url()
+                  : businessInfo?.profilePicURL?.replace("96", "200") ||
+                    urlFor(businessInfo.profilePic).url()
               }
               sx={{
                 width: "200px",
@@ -58,7 +62,7 @@ function ProfileDetails({ setIsEditing }) {
               }}
             />
 
-            {userInfo.loginType === "manual" ? (
+            {businessInfo.loginType === "manual" ? (
               <>
                 <FlexBox csx={{ width: "100%", justifyContent: "flex-end" }}>
                   <Button
@@ -79,7 +83,7 @@ function ProfileDetails({ setIsEditing }) {
               Your name
             </Typography>
 
-            <Typography variant="h6">{userInfo.name}</Typography>
+            <Typography variant="h6">{businessInfo.name}</Typography>
           </Box>
 
           <Box sx={{ width: "100%" }}>
@@ -87,7 +91,7 @@ function ProfileDetails({ setIsEditing }) {
               Email
             </Typography>
 
-            <Typography variant="h6">{userInfo.email}</Typography>
+            <Typography variant="h6">{businessInfo.email}</Typography>
           </Box>
         </FlexBox>
       )}

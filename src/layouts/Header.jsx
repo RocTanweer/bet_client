@@ -20,7 +20,7 @@ import {
 } from "@mui/material";
 
 import { useGlobalState } from "../context/GlobalStateProvider.jsx";
-import { logout } from "../state/actions/userActions";
+import { logout } from "../state/actions/businessActions";
 
 import MenuIcon from "@mui/icons-material/Menu";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -38,8 +38,8 @@ function Header() {
   const open = Boolean(anchorEl);
 
   const {
-    userLogout: { loading: logoutLoading },
-    userDetails: { info: userInfo, loading: userLoading },
+    businessLogout: { loading: logoutLoading },
+    businessDetails: { info: businessInfo, loading: businessLoading },
   } = state;
 
   function handleMenuOpen(e) {
@@ -102,23 +102,23 @@ function Header() {
             <DarkModeIcon />
           </IconButton>
 
-          {/* User settings with dropdown */}
+          {/* business settings with dropdown */}
           <Box>
             <Tooltip title="Open settings">
               <IconButton
                 onClick={handleMenuOpen}
-                aria-controls={open ? "user-settings" : undefined}
+                aria-controls={open ? "business-settings" : undefined}
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
               >
                 <Avatar
-                  alt="user image"
+                  alt="business image"
                   src={
-                    userLoading ||
-                    (!userInfo.profilePic && !userInfo.profilePicURL)
+                    businessLoading ||
+                    (!businessInfo.profilePic && !businessInfo.profilePicURL)
                       ? null
-                      : userInfo.profilePicURL?.replace("96", "200") ||
-                        urlFor(userInfo.profilePic).url()
+                      : businessInfo.profilePicURL?.replace("96", "200") ||
+                        urlFor(businessInfo.profilePic).url()
                   }
                 />
               </IconButton>

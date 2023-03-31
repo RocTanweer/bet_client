@@ -13,7 +13,7 @@ function App() {
   const { state } = useGlobalState();
 
   const {
-    userDetails: { loginToken },
+    businessDetails: { loginToken },
   } = state;
 
   useEffect(() => {

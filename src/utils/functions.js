@@ -41,18 +41,18 @@ export function dataForChart(dateWiseExpenseTrans, dateWiseRevenueTrans) {
 
 /**
  *
- * @param {object} userInfo - responsed user data from google
+ * @param {object} businessInfo - responsed business data from google
  * @returns {object} - formatted object suitable for creating doc in sanity
  */
-export function formatUserInfo(userInfo) {
-  const userDoc = {
+export function formatBusinessInfo(businessInfo) {
+  const businessDoc = {
     _type: "business",
-    name: `${userInfo.given_name} ${userInfo.family_name}`,
-    email: userInfo.email,
-    profilePicURL: userInfo.picture,
+    name: `${businessInfo.given_name} ${businessInfo.family_name}`,
+    email: businessInfo.email,
+    profilePicURL: businessInfo.picture,
     loginType: "gOAuth",
   };
-  return userDoc;
+  return businessDoc;
 }
 
 /**

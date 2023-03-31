@@ -22,7 +22,7 @@ import { useFormik } from "formik";
 import { registerFormValSch } from "../../lib/yupValidationSchemas";
 
 import { GoogleOAuthBtn } from "../../components";
-import { register } from "../../state/actions/userActions";
+import { register } from "../../state/actions/businessActions";
 import { useState } from "react";
 
 function Register() {
@@ -30,8 +30,8 @@ function Register() {
   const { state, dispatch } = useGlobalState();
 
   const {
-    userDetails: { loginToken },
-    userRegister: { loading: registerLoading },
+    businessDetails: { loginToken },
+    businessRegister: { loading: registerLoading },
   } = state;
 
   const formik = useFormik({

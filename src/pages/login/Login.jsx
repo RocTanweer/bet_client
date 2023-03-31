@@ -17,15 +17,15 @@ import { loginFormValSch } from "../../lib/yupValidationSchemas";
 import { useGlobalState } from "../../context/GlobalStateProvider.jsx";
 import { GoogleOAuthBtn } from "../../components";
 
-import { login } from "../../state/actions/userActions";
+import { login } from "../../state/actions/businessActions";
 
 function Login() {
   const { state, dispatch } = useGlobalState();
   const { state: locState } = useLocation();
 
   const {
-    userDetails: { loginToken },
-    userLogin: { loading: loggingLoading },
+    businessDetails: { loginToken },
+    businessLogin: { loading: loggingLoading },
   } = state;
 
   const formik = useFormik({

@@ -1,13 +1,13 @@
 import { decryptString } from "../utils/functions";
 
 import {
-  userRegisterReducer,
-  userLoginReducer,
-  userLoginOAuthReducer,
-  userLogoutReducer,
-  userDetailsReducer,
-  userDetailsUpdateReducer,
-} from "./reducers/userReducers";
+  businessRegisterReducer,
+  businessLoginReducer,
+  businessLoginOAuthReducer,
+  businessLogoutReducer,
+  businessDetailsReducer,
+  businessDetailsUpdateReducer,
+} from "./reducers/businessReducers";
 
 /**
  * i This function is same as combineReducer from redux
@@ -26,12 +26,12 @@ const combineReducers = (slices) => {
 };
 
 export const rootReducer = combineReducers({
-  userRegister: userRegisterReducer,
-  userLogin: userLoginReducer,
-  userLoginOAuth: userLoginOAuthReducer,
-  userDetails: userDetailsReducer,
-  userLogout: userLogoutReducer,
-  userDetailsUpdate: userDetailsUpdateReducer,
+  businessRegister: businessRegisterReducer,
+  businessLogin: businessLoginReducer,
+  businessLoginOAuth: businessLoginOAuthReducer,
+  businessDetails: businessDetailsReducer,
+  businessLogout: businessLogoutReducer,
+  businessDetailsUpdate: businessDetailsUpdateReducer,
 });
 
 const decryptedLoginToken =
@@ -39,13 +39,13 @@ const decryptedLoginToken =
   decryptString(localStorage.getItem("loginToken"));
 
 export const initialState = {
-  userRegister: {},
-  userLogin: {},
-  userLoginOAuth: {},
-  userDetails: {
+  businessRegister: {},
+  businessLogin: {},
+  businessLoginOAuth: {},
+  businessDetails: {
     loginToken: decryptedLoginToken,
     loading: true,
   },
-  userLogout: {},
-  userDetailsUpdate: {},
+  businessLogout: {},
+  businessDetailsUpdate: {},
 };
