@@ -1,6 +1,6 @@
-import GlobalStateProvider from "./GlobalStateProvider.jsx";
-import MyRouterProvider from "./MyRouterProvider.jsx";
-import OAuthProvider from "./OAuthProvider.jsx";
+import GlobalStateProvider from "./stateProvider/GlobalStateProvider.jsx";
+import MyRouterProvider from "./routerProvider/MyRouterProvider.jsx";
+import OAuthProvider from "./oAuthProvider/OAuthProvider.jsx";
 
 function GlobalContextProvider() {
   return (

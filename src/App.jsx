@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { useEffect } from "react";
 import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useGlobalState } from "./context/GlobalStateProvider.jsx";
+import { useBusinessState } from "@/hooks/states.js";
 
 import { Header } from "./layouts";
 import { Sidebar } from "./layouts";
@@ -10,7 +10,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { state } = useGlobalState();
+  const { state } = useBusinessState();
 
   const {
     businessDetails: { loginToken },

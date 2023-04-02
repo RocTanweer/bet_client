@@ -3,12 +3,12 @@ import { useEffect } from "react";
 
 import { FlexBox } from "@/layouts";
 
-import { useGlobalState } from "@/context/GlobalStateProvider";
+import { useBusinessState } from "@/hooks/states.js";
 import { urlFor } from "@/lib/sanityClient.js";
 import { getBusinessDetails } from "@/state/actions/businessActions.js";
 
 function ProfileDetails({ setIsEditing }) {
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch } = useBusinessState();
 
   const {
     businessDetails: {

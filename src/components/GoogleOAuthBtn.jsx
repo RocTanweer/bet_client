@@ -1,6 +1,6 @@
 import { useGoogleLogin } from "@react-oauth/google";
 
-import { useGlobalState } from "../context/GlobalStateProvider.jsx";
+import { useBusinessState } from "@/hooks/states.js";
 
 import { oAuthLogin } from "../state/actions/businessActions";
 
@@ -11,7 +11,7 @@ import { useState } from "react";
 
 function GoogleOAuthBtn() {
   const [errMsg, setErrMsg] = useState("");
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch } = useBusinessState();
 
   const {
     businessLoginOAuth: { loading: oAuthLoading },

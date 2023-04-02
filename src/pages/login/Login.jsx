@@ -13,12 +13,12 @@ import { Navigate, NavLink, useLocation } from "react-router-dom";
 
 import { FlexBox } from "@/layouts";
 import { GoogleOAuthBtn } from "@/components";
-import { useGlobalState } from "@/context/GlobalStateProvider.jsx";
+import { useBusinessState } from "@/hooks/states.js";
 import { login } from "@/state/actions/businessActions";
 import { loginFormValSch } from "./lib/loginYup.js";
 
 function Login() {
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch } = useBusinessState();
   const { state: locState } = useLocation();
 
   const {

@@ -18,7 +18,7 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import { profileDetailsEditFormValSch } from "../lib/profileYup.js";
 import { filterKeyValuePair } from "../utils/profileFunctions.js";
 
-import { useGlobalState } from "@/context/GlobalStateProvider.jsx";
+import { useBusinessState } from "@/hooks/states.js";
 import { updateBusinessDetails } from "@/state/actions/businessActions.js";
 import { resizeFile } from "@/utils/functions";
 
@@ -33,7 +33,7 @@ import {
 function ProfileDetailsEdit({ setIsEditing }) {
   const [prevImage, setPrevImage] = useState("");
 
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch } = useBusinessState();
 
   const {
     businessDetails: { info: businessInfo, loginToken },

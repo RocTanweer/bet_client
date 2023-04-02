@@ -19,7 +19,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-import { useGlobalState } from "../context/GlobalStateProvider.jsx";
+import { useBusinessState } from "@/hooks/states.js";
 import { logout } from "../state/actions/businessActions";
 
 import MenuIcon from "@mui/icons-material/Menu";
@@ -30,7 +30,7 @@ import { NavLink } from "react-router-dom";
 import { urlFor } from "../lib/sanityClient.js";
 
 function Header() {
-  const { state, dispatch } = useGlobalState();
+  const { state, dispatch } = useBusinessState();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
