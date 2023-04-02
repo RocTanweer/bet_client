@@ -1,4 +1,5 @@
-import { decryptString } from "../utils/functions";
+import { combineReducers } from "@/utils/functions";
+import { decryptString } from "@/utils/functions";
 
 import {
   businessRegisterReducer,
@@ -7,25 +8,9 @@ import {
   businessLogoutReducer,
   businessDetailsReducer,
   businessDetailsUpdateReducer,
-} from "./reducers/businessReducers";
+} from "../reducers/businessReducers";
 
-/**
- * i This function is same as combineReducer from redux
- * @param {Object} slices An Object containing all the reducers in a key-value pair
- * @returns rootReducer which is a usual reducer but it remembers slices object as closure and operate upon it and not switch-case stuff
- */
-const combineReducers = (slices) => {
-  return (state, action) => {
-    return Object.keys(slices).reduce((accu, prop) => {
-      return {
-        ...accu,
-        [prop]: slices[prop](accu[prop], action),
-      };
-    }, state);
-  };
-};
-
-export const rootReducer = combineReducers({
+export const businessRootReducer = combineReducers({
   businessRegister: businessRegisterReducer,
   businessLogin: businessLoginReducer,
   businessLoginOAuth: businessLoginOAuthReducer,
@@ -38,7 +23,7 @@ const decryptedLoginToken =
   localStorage.getItem("loginToken") &&
   decryptString(localStorage.getItem("loginToken"));
 
-export const initialState = {
+export const businessInitialState = {
   businessRegister: {},
   businessLogin: {},
   businessLoginOAuth: {},
