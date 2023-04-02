@@ -1,7 +1,6 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 
-import App from "../App";
-
+import App from "../../App";
 import {
   AddExpense,
   AddRevenue,
@@ -15,13 +14,9 @@ import {
   Register,
   RevenueHistory,
   RevenueProducts,
-} from "../pages";
+} from "../../pages";
 
-function MyRouterProvider() {
-  return <RouterProvider router={router} />;
-}
-
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
@@ -78,5 +73,3 @@ const router = createBrowserRouter([
     element: <Register />,
   },
 ]);
-
-export default MyRouterProvider;
