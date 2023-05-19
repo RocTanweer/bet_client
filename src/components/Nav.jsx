@@ -130,6 +130,10 @@ function Nav() {
           </ListItemButton>
         </List>
       </Collapse>
+
+      <ListItemButton component={NavLink} to={"/investment"}>
+        <ListItemText sx={{ textAlign: "center" }} primary="Investment" />
+      </ListItemButton>
     </List>
   );
 }
