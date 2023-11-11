@@ -14,7 +14,8 @@ import {
   Register,
   RevenueHistory,
   RevenueProducts,
-} from "../../pages";
+  Investment,
+} from "@/pages";
 
 export const router = createBrowserRouter([
   {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
       {
         path: "revenue/add",
         element: <AddRevenue />,
+      },
+      {
+        path: "investment",
+        element: <Investment />,
       },
     ],
   },

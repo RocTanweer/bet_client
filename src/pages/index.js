@@ -10,3 +10,4 @@ export { default as Profile } from "./profile/Profile.jsx";
 export { default as Register } from "./register/Register.jsx";
 export { default as RevenueHistory } from "./revenueHistory/RevenueHistory.jsx";
 export { default as RevenueProducts } from "./revenueProducts/RevenueProducts.jsx";
+export { default as Investment } from "./investment/Investment.jsx";
