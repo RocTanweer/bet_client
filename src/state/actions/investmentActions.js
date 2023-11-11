@@ -31,7 +31,7 @@ export async function addInvestment(data, dispatch) {
   }
 }
 
-export async function getInvestments(data, dispatch) {
+export async function getInvestments(data, dispatch, abortController) {
   try {
     dispatch({ type: AT.INVESTMENT_GET_REQUEST });
 
@@ -39,7 +39,13 @@ export async function getInvestments(data, dispatch) {
 
     const query = `*[_type == "investment" && references("${loginToken}")]`;
 
-    const response = await client.fetch(query);
+    const response = await client.fetch(
+      query,
+      {},
+      {
+        signal: abortController.signal,
+      }
+    );
 
     dispatch({
       type: AT.INVESTMENT_DATA_ADDMANY,

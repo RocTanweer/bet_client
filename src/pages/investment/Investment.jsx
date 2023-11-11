@@ -34,9 +34,15 @@ function Investment() {
   } = businessState;
 
   useEffect(() => {
+    const abortController = new AbortController();
+
     async function getInvestmentDetails() {
       try {
-        await getInvestments({ loginToken: loginToken }, investmentDispatch);
+        await getInvestments(
+          { loginToken: loginToken },
+          investmentDispatch,
+          abortController
+        );
       } catch (error) {
         console.log(error);
       }
@@ -47,9 +53,9 @@ function Investment() {
     }
 
     return () => {
-      console.log(investments.length === 0);
+      abortController.abort();
     };
-  }, [investments, loginToken, getInvestments, investmentDispatch]);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
